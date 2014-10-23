@@ -57,7 +57,6 @@ for category in categoryList:
         print tab_path
         
         filenames = glob.glob(html_tab_path+'*.html')
-        print filenames
     
         allBook = []
         rank = 1
@@ -78,6 +77,8 @@ for category in categoryList:
                 dt = li.find('dt')
                 book_url = dt.find('a')['href']
                 book_title = dt.find('a').string
+                if book_title == None:
+                    continue
 
                 dds = li.find_all('dd')
                 date = dds[0].contents[-1].lstrip().rstrip()
@@ -86,13 +87,13 @@ for category in categoryList:
 
                 authors = []
                 aa = dds[0].find_all('a')
+
                 publisher = ""
-                '''
                 if dds[0].contents[-3] <> None:
-                    publisher = dds[0].contents[-3].lstrip().rstrip()
+                    publisher = dds[0].contents[-3].string.lstrip().rstrip()
                 else:
                     publisher = ""
-                    '''
+
                 for a in aa:
                     now = a['href']
                     now = now.lstrip().rstrip()
@@ -101,10 +102,8 @@ for category in categoryList:
                         'author_url':now
                     }
                     authors.append(t)
-                    '''
-                body = dds[2].contents[2]
-                '''
-                body = ''
+
+                body = dds[2].contents[1].lstrip().rstrip()
                 t = {
                     'img_url':img_src,
                     'book_url':book_url,
@@ -118,4 +117,5 @@ for category in categoryList:
                 }
                 allBook.append(t)
                 rank = rank+1
-        print allBook
+        with open(tab_path+'books.json','w') as fp:
+            fp.write(json.dumps(allBook))
