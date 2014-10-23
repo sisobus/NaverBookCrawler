@@ -1,4 +1,3 @@
 NaverBookCrawler
 ================
 
-for HSB
