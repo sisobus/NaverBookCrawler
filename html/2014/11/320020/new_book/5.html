@@ -1,0 +1,3018 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>
+신간도서, 초등3~4학년, 어린이 : 네이버 책</title>
+<link rel="shortcut icon" href="http://www.naver.com/favicon.ico?book" type="image/x-icon">
+<script type="text/javascript">
+var __bLogin = false;
+var __bAdult = false;
+</script>
+<link rel="stylesheet" type="text/css" href="/css/release/base_20141113172321.css">
+		<script type="text/javascript" src="/js/release/base_20141113172321.js" charset="UTF-8"></script>
+		<link rel="stylesheet" type="text/css" href="/css/release/comment_20141113172321.css">
+			<script type="text/javascript" src="/js/release/comment_20141113172321.js"></script>
+		<script type="text/javascript">
+	document.domain ="naver.com";
+	var g_stab = "nexersh";
+</script>
+<script type="text/javascript">
+
+
+	var nsc = "";
+
+
+var gnb_service = "book";
+var gnb_logout = encodeURIComponent("https://nid.naver.com/nidlogin.login");
+var gnb_template = "gnb_utf8";
+var gnb_searchbox = "off";
+var gnb_shortnick = "off";
+var gnb_brightness = 1;
+
+var smartSearch = ""; 
+var detailSearchEvents = {};	
+var initDetailSearchCate = false; 
+jindo.$Fn(function() {
+	
+	var ajax = jindo.$Ajax("/search/detail_search_form_ajax.nhn", {
+		type : 'xhr',
+		onload : function(res) {
+			jindo.$Element("detailSearchLayer").html(res.text());
+		}
+	});
+	ajax.request();
+	
+	detailSearchEvents["btn_detail_search"] = makeEventHandler(toggleDetailSearch, jindo.$("btn_detail_search"), "click");
+	
+	if (jindo.$Agent().navigator().ie) {
+		var KEY_CODE_ENTER = 13;
+		jindo.$A(jindo.$$("input[type=text]", jindo.$("detailSearchLayer"))).forEach( function(ele) {
+			detailSearchEvents[ele.name] = makeEventHandler( function(e) {
+				if (e.key().keyCode == KEY_CODE_ENTER) {
+					if (detailSearch(e)) {
+						jindo.$("detailSearchForm").submit();
+					}
+				}
+			}, ele, "keydown");
+		});
+	}
+
+	jindo.$Fn(function(){
+		for ( var x in detailSearchEvents ) {
+			if (detailSearchEvents[x] && detailSearchEvents[x].detachEvent) {
+	  			detailSearchEvents[x].detachEvent();
+			}
+		}
+	}).attach(window, "unload");
+
+	var showTab = '';
+	if ( showTab == "" && self.location.hash == "" ) {
+		$("startPoint").focus();
+	}
+	
+	$Fn(focusThisBestSellerLastTabCpSub).attach($("last_tab_cp_sub"), "keydown");
+	$Fn(focusThisBestSellerTabCpSpt).attach($$("a[id^=tab_cp_spt_]"), "keydown");
+	
+	jindo.$Fn(function(e) {
+		var gnbLayer = jindo.$Element("gnb");
+		var eventElement = jindo.$Element(e.element);
+		
+		if(eventElement.isChildOf(gnbLayer) == false) {
+			gnbAllLayerClose();
+		}
+	}).attach(document.body, "click");
+	
+}).attach(window, "load");
+
+function focusThisBestSellerLastTabCpSub(event) {
+	var key = event.key();
+	var TAB_KEY_CODE = 9;
+	if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+		var cpCategory = $$("#bestseller_tab > ul.tab_cp_spt > li.selected")[0];
+		var nextCpCategory = $Element(cpCategory).next();
+		if (nextCpCategory != null) {
+			var className = nextCpCategory.first().className().split(" ")[0];
+			$$("#bestseller_tab > ul.tab_cp_spt > li > a." + className)[0].focus();
+		} else {
+			nextFocusSelect("fist_thisBestseller_img");
+		}
+		event.stopDefault();
+	}
+}
+
+function focusThisBestSellerTabCpSpt(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+			var parentNode = $(event).currentElement.parentNode;
+			if ( $Element(parentNode).hasClass("selected") == true) {
+				nextFocusSelect("first_tab_cp_sub");
+				event.stopDefault();
+			} else {
+				if($Element(parentNode).next() == null) {
+					nextFocusSelect("fist_thisBestseller_img");
+					event.stopDefault();
+				}
+			}	
+		}
+}
+function searchList(searchFormId) {
+	document.getElementById(searchFormId).action = "/search/search.nhn"
+	document.getElementById(searchFormId).target = "_self"
+	document.getElementById(searchFormId).acceptCharset = 'utf-8';
+	document.charset = "utf-8";
+	document.getElementById(searchFormId).submit();
+	return false;
+}
+
+function goNaverSearch(searchFormId) {
+	document.getElementById(searchFormId).action = "http://search.naver.com/search.naver?where=nexearch&frm=t1&sm=svc_nrs";
+	document.getElementById(searchFormId).target = "_blank";
+	document.getElementById(searchFormId).acceptCharset = 'euc-kr';
+	document.charset = "euc-kr";
+	document.getElementById(searchFormId).submit();
+
+	//init
+	document.getElementById(searchFormId).acceptCharset = 'utf-8';
+	document.charset = "utf-8";
+	document.getElementById(searchFormId).action = "/search/search.nhn"
+	document.getElementById(searchFormId).target = "_self";
+}
+
+window.onbeforeunload  = function  () {
+	document.charset = "utf-8";
+}
+
+function changeDefaultCharset() {
+	document.charset = "utf-8";
+}
+
+
+function toggleDetailSearch(e) {
+	jindo.$Element("detailSearchLayer").toggle();
+
+	if (jindo.$Element("detailSearchLayer").visible()) {
+
+		jindo.$Element("btn_detail_search").addClass("on");
+		
+		jindo.$Fn(function(event) {
+			var key = event.key();
+			var TAB_KEY_CODE = 9;
+			if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+				nextFocusSelect('btn_detail_search');
+				event.stopDefault();
+			}
+		}).attach($("closelayerBtn"), "keydown");
+		
+		jindo.$Fn(function() {
+			nextFocusSelect('btn_detail_search');
+		}).attach($("closeDetailSearch", "closelayerBtn"), "click");
+		
+		if (!initDetailSearchCate) {
+			loadSubCategory(1, "");
+			initDetailSearchCate = true;
+		}
+		
+		detailSearchEvents["closelayer"] = makeEventHandler( toggleDetailSearch, jindo.$$.getSingle("a.closelayer", jindo.$("detailSearchLayer")), "click");
+		detailSearchEvents["closelayer"] = makeEventHandler( toggleDetailSearch, jindo.$$.getSingle("a.closelayer", jindo.$("detailSearchLayer")), "blur");
+		detailSearchEvents["closeDetailSearch"] = makeEventHandler( toggleDetailSearch, jindo.$("closeDetailSearch"), "click");
+		detailSearchEvents["initDetailSearch"] = makeEventHandler( initDetailSearch, jindo.$("initDetailSearch"), "click");
+		detailSearchEvents["detailSearchForm"] = makeEventHandler( detailSearch, jindo.$("detailSearchForm"), "submit");
+
+		jindo.$A(jindo.$$("select[name*=cate]", jindo.$("detailSearchLayer"))).forEach( function(ele) {
+			detailSearchEvents[ele.name] = makeEventHandler( selectCategory, ele, "change");
+		});
+
+	} else {
+		jindo.$Element("btn_detail_search").removeClass("on");
+
+		detailSearchEvents["closelayer"].detachEvent();
+		detailSearchEvents["closeDetailSearch"].detachEvent();
+		detailSearchEvents["initDetailSearch"].detachEvent();
+		detailSearchEvents["detailSearchForm"].detachEvent();
+		jindo.$A(jindo.$$("select[name*=cate]", jindo.$("detailSearchLayer"))).forEach( function(ele) {
+			detailSearchEvents[ele.name].detachEvent();
+		});
+
+		initDetailSearch(e);
+	}
+	
+	e.stopDefault();
+}
+
+
+function selectCategory(e) {
+	var m = /cate([1-4]{1})Depth/.exec(e.element.name);
+	var selectedCategory = e.element.value;
+	var depth;
+
+	if (!!m && m.length >= 2) {
+		depth = parseInt(m[1], 10); //m[1] 은 현재 선택한 카테고리 depth
+	}
+
+	if (++depth <= 4 && selectedCategory != "" ) {
+		loadSubCategory(depth, selectedCategory);
+	}
+}
+
+
+function loadSubCategory(depth, category) {
+
+	for (var i = depth; i <= 4; i++) {
+		var selectObj = jindo.$$.getSingle("select[name=cate" + i + "Depth]", jindo.$("detailSearchLayer"));
+		jindo.$Element(selectObj).hide();
+	}
+
+	$Ajax("/category/child_category.nhn", {
+		onload : function(res) {
+			initSubCategory(depth);
+			var cateNDepth = jindo.$$.getSingle("select[name=cate" + depth + "Depth]", jindo.$("detailSearchLayer"));
+			var cate = jindo.$A(res.json());
+			if (!!cate && cate.length() > 0) {
+				jindo.$Element(cateNDepth).show();
+				cate.forEach( function(cate, i) {
+					var optionObj = document.createElement("option");
+					optionObj.text = cate.name;
+					optionObj.value = cate.code;
+					cateNDepth.options.add(optionObj);
+				});
+			}
+		}
+	}).request( { cate_code:category} ); //category code 값을 주지 않으면 1 depth 전체.
+}
+
+
+function initSubCategory(depth) {
+	for ( var i = depth; i <= 4; i++ ) {
+		var select = jindo.$$.getSingle("select[name=cate" + i + "Depth]", jindo.$("detailSearchLayer"));
+		select.options.length = 0;
+		var optionObj = document.createElement("option");
+		optionObj.text = "- - - - - - - - - - - - - - - - -";
+		optionObj.value = "";
+		select.options.add(optionObj);
+	}
+}
+
+
+function initDetailSearch(e) {
+	jindo.$A(jindo.$$("input[type=text]", jindo.$("detailSearchLayer"))).forEach( function(ele) { ele.value = ""; });
+	jindo.$A(jindo.$$("select", jindo.$("detailSearchLayer"))).forEach( function( ele ) { ele.value = ""; });
+
+	jindo.$A(jindo.$$("select[name*=cate]", jindo.$("detailSearchLayer"))).forEach( function(ele, index) {
+		if (index >= 1) {
+			jindo.$Element(ele).hide();
+		}
+	});
+	e.stopDefault();
+}
+
+
+function detailSearch(e) {
+	var publishStartYear, publishStartMonth, publishEndYear, publishEndMonth;
+	jindo.$A(jindo.$$("select[name*=publish]", jindo.$("detailSearchLayer"))).forEach( function( ele ) {
+		if (ele.value != "") {
+			eval(ele.name + "= ele.value");
+		}
+	});
+	var publishStartDay = jindo.$$.getSingle("input[name=publishStartDay]", jindo.$("detailSearchForm"));
+	var publishEndDay = jindo.$$.getSingle("input[name=publishEndDay]", jindo.$("detailSearchForm"));
+	publishStartDay.value = "";
+	publishEndDay.value = "";
+
+	if (!!publishStartYear) {
+		if (!!publishStartMonth) {
+			publishStartDay.value = publishStartYear + publishStartMonth;
+		} else {
+			publishStartDay.value = publishStartYear + "01";
+		}
+	} else if (!!publishStartMonth) {
+		alert("발간 연도를 선택해 주세요.");
+		e.stopDefault();
+		return false;
+	}
+
+	if (!!publishEndYear) {
+		if (!!publishEndMonth) {
+			publishEndDay.value = publishEndYear + publishEndMonth;
+		} else {
+			publishEndDay.value = publishEndYear + new jindo.$Date().format("m");
+		}
+	} else if (!!publishEndMonth) {
+		alert("발간 연도를 선택해 주세요.");
+		e.stopDefault();
+		return false;
+	}
+
+	if (publishStartDay.value == "" && publishEndDay.value != "") {
+		publishStartDay.value = "198001"
+	}
+	if (publishStartDay.value != "" && publishEndDay.value == "") {
+		publishEndDay.value = new jindo.$Date().format("Ym");
+	}
+
+	if (publishStartDay.value != "" && publishEndDay.value != "") {
+		if (parseInt(publishStartDay.value, 10) > parseInt(publishEndDay.value, 10)) {
+			alert("기간 범위가 잘못되었습니다. 다시 선택해 주세요.");
+			e.stopDefault();
+			return false;
+		}
+	}
+
+	var maxDepth = 0;
+	var selectedCategory;
+	jindo.$A(jindo.$$("select[name*=cate]", jindo.$("detailSearchLayer"))).forEach( function(ele) {
+		var m = /cate([1-4]{1})Depth/.exec(ele.name);
+		if (!!m && m.length >= 2 && parseInt(m[1], 10) > maxDepth && ele.value != "") {
+			maxDepth = parseInt(m[1], 10); //m[1] 은 현재 선택한 카테고리 depth
+			selectedCategory = ele.value;
+		}
+	});
+
+	var valid = false;
+	jindo.$A(jindo.$$("input[type=text]", jindo.$("detailSearchLayer"))).forEach(
+		function(ele) {
+			if (jindo.$S(ele.value).trim() != "") {
+				valid = true;
+			}
+		}
+	);
+
+	if (!!selectedCategory) {
+		jindo.$$.getSingle("input[name=categoryId]", jindo.$("detailSearchForm")).value = selectedCategory;
+	}
+
+	if (!valid ) {
+		alert("상세검색을 위해 적어도 한 곳에는 검색어를 입력해 주세요.");
+		e.stopDefault();
+		return false;
+	}
+
+	return true;
+}
+
+function makeEventHandler(fpCallback, oElement, sEventType) {
+	var ret = {};
+	ret = jindo.$Fn( fpCallback, this ).attach( oElement, sEventType );
+	ret.detachEvent = function() {
+ 		ret.detach( oElement, sEventType );
+	}
+	return ret;
+}
+
+function nextFocusSelect(idName) {
+	$(idName).focus();
+}
+
+
+function nextLeftCategoryFocus() {
+	if ($Element("btn_left_category").hasClass("on") == true) { 
+		if (false) {
+			$("yes24_bestseller").focus();
+		} else if (false) {
+			$("todaybook_recent").focus();
+		} else if (false) {
+			$("theme_rcmmd").focus();
+		} else if (false) {
+			showNaverMeExplain();
+			$$("#naverMeExplain a")[0].focus();
+		} else if (false) {
+			$("wish_list").focus();
+		} else if (false) {
+			$("book_search").focus();
+		} else if (false) {
+			$("home_navi").focus();
+		} else if (false) {
+			$("tab_library").focus();
+		} 
+	} else {
+		$$("#lc_100 > a[name=lc_100]")[0].focus();
+	}
+}
+</script></head>
+<body>
+
+<div id="wrap" >
+	<div id="u_skip">
+		<a href="#" id="startPoint" style="overflow:hidden;z-index:-1;width:1px;height:1px;padding:0;border:none;background:none;font-size:0;line-height:0">스킵 네비게이션 사용하기</a>
+		<a href="#lnb" onclick="document.getElementById('lnb').tabIndex=-1;document.getElementById('lnb').focus();return false;"><span>메인 메뉴로 바로가기</span></a>
+		<a href="javascript:nextLeftCategoryFocus();" ><span>하위 메뉴로 바로가기</span></a>
+		<a href="#content" onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;"><span>본문으로 바로가기</span></a>
+	</div>
+	<div id="header">
+		<span class="blind">글로벌 메뉴</span>
+		<div id="gnb">
+		 	<script type="text/javascript" charset="utf-8" src="http://static.gn.naver.net/template/gnb_utf8.nhn?20141113"></script>
+		</div>		
+		<div id="snb_wrap" class="NE=a:STA">
+			 <h1><a href="http://www.naver.com" class="NPI=a:naverlogo"><img src="http://static.naver.net/header/h1/bi_naver.gif" width="85" height="25" alt="NAVER" title="NAVER"></a>
+				<a href="/" class="NPI=a:book"><img src="http://static.naver.net/book/image/h_book.gif" width="20" height="25" alt="책" title="책"></a>
+				<span>|</span>
+				<a target="_blank" href="http://nstore.naver.com/ebook/recommendList.nhn" class="h_ebook N=a:LNB.books"><img src="http://static.naver.net/book/image/h_ebook.gif" width="29" height="19" alt="e북" title="e북"></a>
+			</h1>
+			<form id="snbSearchForm" name="search" method="get" action="/search/search.nhn">
+			<fieldset>
+				<legend>검색</legend>
+				<div class="snb_search_box">
+					<div class="snb_search_box_sub">
+						<input type="hidden" name="sm" id="sm" value="sta_hty.book">
+						<input type="hidden" name="sug" id="sug" value="">
+						<input type="hidden" name="where" value="nexearch">
+						
+						<input type="text" title="검색" name="query" autocomplete="off" value="" id="nx_query"  accesskey="s" class="snb_search_text" maxlength="120">
+				 		
+				 		<span class="btn_arrow" id="nautocomplete">
+					  		<a href="#" onclick="return false;" class="btn_arrow"><img class="triangleImg" src="http://static.naver.net/common/snb/090513/bu_arrow_down.gif" alt="자동완성 펼치기" title="자동완성 펼치기" width="21" height="19"></a>
+						</span>
+						<div style="position:absolute; left:2px; top:22px; z-index:1;" >
+							<iframe id="autoFrame" title="자동완성" src="about:blank" frameborder="0" width="450" height="0" marginwidth="0" marginheight="0" scrolling="no" style="display:none"></iframe>
+						</div>
+					</div>
+					<input id="search_btn" src="http://static.naver.net/book/image/btn_search.gif" alt="검색" title="검색" type="image" class="btn_search NPI=a:search" onclick="return searchList('snbSearchForm')">
+					<a href="javascript:goNaverSearch('snbSearchForm');" class="btn_search N=a:STA.nx"><img src="http://static.naver.net/book/image/btn_united_search.gif" width="56" height="25" alt="통합검색" title="통합검색"></a>
+					<a href="#" class="btn_detail_search N=a:STA.detailsearch" id="btn_detail_search"><img src="http://static.naver.net/book/image/btn_detail_search.gif" width="44" height="35" alt="상세검색" title="상세검색"></a>
+				</div>
+			</fieldset>
+			</form>
+		</div>
+
+		<div class="layerpopup" style="left:-3px; top:58px;" id="detailSearchLayer"></div>
+		<div class="lnb" id="lnb">
+			<span class="blind">주메뉴</span>
+			<ul>
+			<li id="btn_left_category" class="depth1"><a href="#" id="search_category" onclick="return false;" class="N=a:LNB.categorysearch"><span>분야별 찾기</span></a></li>
+			<li class="depth2"><a href="/index.nhn" class="N=a:LNB.home" id="homeTab"><span>책 홈</span></a></li>
+			<li class="depth3"><a href="/bestsell/bestseller_list.nhn" class="N=a:LNB.bestseller"><span>베스트셀러</span></a></li>
+			<li class="depth4"><a href="/todaybook/todaybook_recent.nhn" class="N=a:LNB.todaybook"><span>오늘의 책</span></a></li>
+			<li class="depth5"><a href="/bookshelf/index.nhn" class="N=a:LNB.bookshelf"><span>지식인의 서재</span></a></li>
+			<li class="depth6"><a href="/myroom/wish_list.nhn" class="N=a:LNB.mine"><span>내 서재</span></a></li>
+			</ul>
+			<span class="blind">관련 서비스</span>
+            <p class="sub_lnk">
+                <a target="_blank" href="http://publisher.naver.com" class="N=a:LNB.publisher publishing"><span>출판사공간</span></a>
+                <a target="_blank" href="http://navercast.naver.com/magazine_list.nhn?cid=2267&category_id=2267&type=book" class="mgz_cast N=a:LNB.mazbcast" id="naver_bookCast"><span>매거진 북캐스트</span></a>
+            </p>
+            </div>
+		<div id="layer_left_category" class="category_all bnone">
+			<h3 class="blind">전체 분야 메뉴</h3>
+			<div id="left_category" class="category">
+							<ul>
+							<li id="lc_100"><a cate="100" class="item1_1 N=a:cat.100" name="lc_100"><span>소설</span></a>
+								<div id="sub_lc_100" class="sub_lst">
+									<ul>
+										<li><a cate="100010">나라별 소설</a></li>
+										<li><a cate="100020">고전/문학</a></li>
+										<li><a cate="100030">장르소설</a></li>
+										<li><a cate="100040">테마소설</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_110"><a cate="110" class="item1_2 N=a:cat.110" name="lc_110"><span>시/에세이</span></a>
+								<div id="sub_lc_110" class="sub_lst">
+									<ul>
+										<li><a cate="110010">한국시</a></li>
+										<li><a cate="110020">외국시</a></li>
+										<li><a cate="110080">그림/포토 에세이</a></li>
+										<li><a cate="110060">독서 에세이</a></li>
+										<li><a cate="110070">명상 에세이</a></li>
+										<li><a cate="110050">성공 에세이</a></li>
+										<li><a cate="110040">여행 에세이</a></li>
+										<li><a cate="110090">연애/사랑 에세이</a></li>
+										<li><a cate="110030">인물 에세이</a></li>
+										<li><a cate="110100">삶의 지혜/명언</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_160"><a cate="160" class="item2_1 N=a:cat.160" name="lc_160"><span>경제/경영</span></a>
+								<div id="sub_lc_160" class="sub_lst">
+									<ul>
+										<li><a cate="160010">경제</a></li>
+										<li><a cate="160020">경영</a></li>
+										<li><a cate="160030">마케팅/세일즈</a></li>
+										<li><a cate="160040">재테크/투자</a></li>
+										<li><a cate="160050">창업/취업</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_170"><a cate="170" class="item2_2 N=a:cat.170" name="lc_170"><span>자기계발</span></a>
+								<div id="sub_lc_170" class="sub_lst">
+									<ul>
+										<li><a cate="170050">대화/협상</a></li>
+										<li><a cate="170010">성공/처세</a></li>
+										<li><a cate="170020">시간관리</a></li>
+										<li><a cate="170040">인간관계</a></li>
+										<li><a cate="170030">자기능력계발</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_120"><a cate="120" class="item3_1 N=a:cat.120" name="lc_120"><span>인문</span></a>
+								<div id="sub_lc_120" class="sub_lst">
+									<ul>
+										<li><a cate="120010">인문일반</a></li>
+										<li><a cate="120020">심리</a></li>
+										<li><a cate="120030">교육학</a></li>
+										<li><a cate="120040">철학</a></li>
+										<li><a cate="120050">문학론</a></li>
+										<li><a cate="120060">언어학/기호학</a></li>
+										<li><a cate="120070">종교학</a></li>
+										<li><a cate="120080">신화</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_190"><a cate="190" class="item3_2 N=a:cat.190" name="lc_190"><span>역사/문화</span></a>
+								<div id="sub_lc_190" class="sub_lst">
+									<ul>
+										<li><a cate="190010">역사/문화일반</a></li>
+										<li><a cate="190020">세계사</a></li>
+										<li><a cate="190030">서양사</a></li>
+										<li><a cate="190040">동양사</a></li>
+										<li><a cate="190050">한국사</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_180"><a cate="180" class="item3_3 N=a:cat.180" name="lc_180"><span>사회</span></a>
+								<div id="sub_lc_180" class="sub_lst">
+									<ul>
+										<li><a cate="180010">정치/외교</a></li>
+										<li><a cate="180020">행정/정책</a></li>
+										<li><a cate="180030">국방/군사/경찰</a></li>
+										<li><a cate="180040">법</a></li>
+										<li><a cate="180050">사회학</a></li>
+										<li><a cate="180060">사회복지</a></li>
+										<li><a cate="180070">언론/신문/방송</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_250"><a cate="250" class="item3_4 N=a:cat.250" name="lc_250"><span>과학/공학</span></a>
+								<div id="sub_lc_250" class="sub_lst">
+									<ul>
+										<li><a cate="250090">공학일반/산업공학</a></li>
+										<li><a cate="250020">과학기본서</a></li>
+										<li><a cate="250100">기계/전기/전자</a></li>
+										<li><a cate="250110">농수산/축산</a></li>
+										<li><a cate="250080">도시/토목/건설</a></li>
+										<li><a cate="250040">물리학</a></li>
+										<li><a cate="250060">생물학</a></li>
+										<li><a cate="250030">수학</a></li>
+										<li><a cate="250010">쉽게 읽는 과학</a></li>
+										<li><a cate="250120">의학/식품/생활과학</a></li>
+										<li><a cate="250070">천문/지구과학</a></li>
+										<li><a cate="250050">화학</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_210"><a cate="210" class="item3_5 N=a:cat.210" name="lc_210"><span>예술/대중문화</span></a>
+								<div id="sub_lc_210" class="sub_lst">
+									<ul>
+										<li><a cate="210010">예술일반</a></li>
+										<li><a cate="210020">미술</a></li>
+										<li><a cate="210030">음악</a></li>
+										<li><a cate="210040">건축</a></li>
+										<li><a cate="210050">만화/애니메이션</a></li>
+										<li><a cate="210060">사진</a></li>
+										<li><a cate="210070">연극/영화</a></li>
+										<li><a cate="210080">TV/대중문화</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_200"><a cate="200" class="item3_6 N=a:cat.200" name="lc_200"><span>종교</span></a>
+								<div id="sub_lc_200" class="sub_lst">
+									<ul>
+										<li><a cate="200020">기독교(개신교)</a></li>
+										<li><a cate="200030">가톨릭</a></li>
+										<li><a cate="200040">불교</a></li>
+										<li><a cate="200010">종교일반</a></li>
+										<li><a cate="200050">기타</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_310"><a cate="310" class="item4_1 N=a:cat.310" name="lc_310"><span>유아</span></a>
+								<div id="sub_lc_310" class="sub_lst">
+									<ul>
+										<li><a cate="310010">0~3세</a></li>
+										<li><a cate="310020">4~7세</a></li>
+										<li><a cate="310030">유아놀이책</a></li>
+										<li><a cate="310040">유아그림책</a></li>
+										<li><a cate="310050">유아학습</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_320"><a cate="320" class="item4_2 N=a:cat.320" name="lc_320"><span>어린이</span></a>
+								<div id="sub_lc_320" class="sub_lst">
+									<ul>
+										<li><a cate="320010">초등1~2학년</a></li>
+										<li><a cate="320020">초등3~4학년</a></li>
+										<li><a cate="320030">초등5~6학년</a></li>
+										<li><a cate="320040">어린이(공통)</a></li>
+										<li><a cate="320050">어린이영어</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_130"><a cate="130" class="item5_1 N=a:cat.130" name="lc_130"><span>가정/생활/요리</span></a>
+								<div id="sub_lc_130" class="sub_lst">
+									<ul>
+										<li><a cate="130010">결혼/가족</a></li>
+										<li><a cate="130020">임신/출산/육아</a></li>
+										<li><a cate="130030">자녀교육</a></li>
+										<li><a cate="130040">집/살림</a></li>
+										<li><a cate="130050">요리</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_140"><a cate="140" class="item5_2 N=a:cat.140" name="lc_140"><span>건강</span></a>
+								<div id="sub_lc_140" class="sub_lst">
+									<ul>
+										<li><a cate="140010">건강정보/에세이</a></li>
+										<li><a cate="140030">다이어트/미용</a></li>
+										<li><a cate="140040">요가/헬스</a></li>
+										<li><a cate="140020">질병치료/예방</a></li>
+										<li><a cate="140050">건강운동 기타</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_150"><a cate="150" class="item5_3 N=a:cat.150" name="lc_150"><span>취미/레저</span></a>
+								<div id="sub_lc_150" class="sub_lst">
+									<ul>
+										<li><a cate="150050">꽃꽂이</a></li>
+										<li><a cate="150010">뜨개질/퀼트/십자수</a></li>
+										<li><a cate="150020">비즈/구슬공예</a></li>
+										<li><a cate="150030">선물포장/리본공예</a></li>
+										<li><a cate="150040">옷만들기</a></li>
+										<li><a cate="150110">가구/DIY</a></li>
+										<li><a cate="150070">바둑/장기</a></li>
+										<li><a cate="150090">사진/비디오</a></li>
+										<li><a cate="150080">애완동물</a></li>
+										<li><a cate="150100">원예/조경</a></li>
+										<li><a cate="150060">퍼즐/스도쿠</a></li>
+										<li><a cate="150130">골프</a></li>
+										<li><a cate="150150">낚시</a></li>
+										<li><a cate="150160">달리기/마라톤</a></li>
+										<li><a cate="150140">등산</a></li>
+										<li><a cate="150170">레저/스포츠기타</a></li>
+										<li><a cate="150120">취미기타</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_270"><a cate="270" class="item5_4 N=a:cat.270" name="lc_270"><span>여행/지도</span></a>
+								<div id="sub_lc_270" class="sub_lst">
+									<ul>
+										<li><a cate="270010">국내여행</a></li>
+										<li><a cate="270020">해외여행</a></li>
+										<li><a cate="270030">테마여행</a></li>
+										<li><a cate="270040">지도/지리</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_230"><a cate="230" class="item6_1 N=a:cat.230" name="lc_230"><span>국어/외국어</span></a>
+								<div id="sub_lc_230" class="sub_lst">
+									<ul>
+										<li><a cate="230010">국어</a></li>
+										<li><a cate="230020">영어</a></li>
+										<li><a cate="230030">일본어</a></li>
+										<li><a cate="230040">중국어</a></li>
+										<li><a cate="230050">기타 외국어</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_240"><a cate="240" class="item6_2 N=a:cat.240" name="lc_240"><span>사전</span></a>
+								<div id="sub_lc_240" class="sub_lst">
+									<ul>
+										<li><a cate="240050">국어사전</a></li>
+										<li><a cate="240040">한자사전</a></li>
+										<li><a cate="240010">한영/영한/영영사전</a></li>
+										<li><a cate="240020">일한/한일사전</a></li>
+										<li><a cate="240030">중한/한중사전</a></li>
+										<li><a cate="240060">기타나라어사전</a></li>
+										<li><a cate="240070">백과/전문사전</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_280"><a cate="280" class="item6_3 N=a:cat.280" name="lc_280"><span>컴퓨터/IT</span></a>
+								<div id="sub_lc_280" class="sub_lst">
+									<ul>
+										<li><a cate="280010">웹/컴퓨터입문/활용</a></li>
+										<li><a cate="280020">IT 전문서</a></li>
+										<li><a cate="280030">그래픽/멀티미디어</a></li>
+										<li><a cate="280040">오피스활용도서</a></li>
+										<li><a cate="280050">컴퓨터수험서</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul>
+							<li id="lc_300"><a cate="300" class="item7_1 N=a:cat.300" name="lc_300"><span>청소년</span></a>
+								<div id="sub_lc_300" class="sub_lst">
+									<ul>
+										<li><a cate="300020">공부방법/진학가이드</a></li>
+										<li><a cate="300010">논술대비</a></li>
+										<li><a cate="300030">진로/진학가이드</a></li>
+										<li><a cate="300040">청소년 경제/자기계발</a></li>
+										<li><a cate="300080">청소년 과학</a></li>
+										<li><a cate="300050">청소년 문학</a></li>
+										<li><a cate="300070">청소년 예술</a></li>
+										<li><a cate="300060">청소년 인문/사회</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_220"><a cate="220" class="item7_2 N=a:cat.220" name="lc_220"><span>학습/참고서</span></a>
+								<div id="sub_lc_220" class="sub_lst">
+									<ul>
+										<li><a cate="220010">고등학교</a></li>
+										<li><a cate="220020">중학교</a></li>
+										<li><a cate="220030">초등학교</a></li>
+										<li><a cate="220040">논술/면접대비</a></li>
+										<li><a cate="220050">공부방법/진학</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_260"><a cate="260" class="item7_3 N=a:cat.260" name="lc_260"><span>취업/수험서</span></a>
+								<div id="sub_lc_260" class="sub_lst">
+									<ul>
+										<li><a cate="260010">취업/상식/적성검사</a></li>
+										<li><a cate="260020">공무원</a></li>
+										<li><a cate="260030">고시</a></li>
+										<li><a cate="260040">전문직</a></li>
+										<li><a cate="260050">편입/검정고시</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_330"><a cate="330" class="item7_4 N=a:cat.330" name="lc_330"><span>만화</span></a>
+								<div id="sub_lc_330" class="sub_lst">
+									<ul>
+										<li><a cate="330090">공포/추리</a></li>
+										<li><a cate="330010">교양만화</a></li>
+										<li><a cate="330020">드라마</a></li>
+										<li><a cate="330080">명랑/코믹만화</a></li>
+										<li><a cate="330030">성인만화</a></li>
+										<li><a cate="330040">순정만화</a></li>
+										<li><a cate="330050">스포츠만화</a></li>
+										<li><a cate="330070">액션/무협만화</a></li>
+										<li><a cate="330110">웹툰/카툰에세이</a></li>
+										<li><a cate="330100">학원만화</a></li>
+										<li><a cate="330130">일본어판 만화</a></li>
+										<li><a cate="330140">영문판 만화</a></li>
+										<li><a cate="330060">SF/판타지</a></li>
+										<li><a cate="330120">기타만화</a></li>
+									</ul>
+									</div>
+							</li>
+							<li id="lc_290"><a cate="290" class="item7_5 N=a:cat.290" name="lc_290"><span>잡지</span></a>
+								<div id="sub_lc_290" class="sub_lst">
+									<ul>
+										<li><a cate="290010">여성/패션/리빙</a></li>
+										<li><a cate="290020">인문/사회/종교</a></li>
+										<li><a cate="290030">문예/교양지</a></li>
+										<li><a cate="290040">자연/공학</a></li>
+										<li><a cate="290050">컴퓨터/게임/그래픽</a></li>
+										<li><a cate="290060">어학/교육</a></li>
+										<li><a cate="290070">예술/대중문화</a></li>
+										<li><a cate="290080">취미/여행</a></li>
+										<li><a cate="290090">외국잡지</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<ul class="last">
+							<li id="lc_340"><a cate="340" class="item8_1 N=a:cat.340" name="lc_340"><span>해외도서</span></a>
+								<div id="sub_lc_340" class="sub_lst">
+									<ul>
+										<li><a cate="340080">가족/생활</a></li>
+										<li><a cate="340040">건축/예술</a></li>
+										<li><a cate="340030">경영경제</a></li>
+										<li><a cate="340120">과학/공학/수학</a></li>
+										<li><a cate="340010">문학/소설</a></li>
+										<li><a cate="340130">사회/정치/법</a></li>
+										<li><a cate="340090">언어/외국어/사전</a></li>
+										<li><a cate="340060">요리</a></li>
+										<li><a cate="340020">유아청소년/교육</a></li>
+										<li><a cate="340110">종교/명상</a></li>
+										<li><a cate="340100">철학/심리/역사</a></li>
+										<li><a cate="340070">취미/여행</a></li>
+										<li><a cate="340050">컴퓨터</a></li>
+										<li><a cate="340140">독일</a></li>
+										<li><a cate="340160">스페인</a></li>
+										<li><a cate="340170">일본도서</a></li>
+										<li><a cate="340150" onblur="hideCategoryLayer(this)" class="sub_lst_lc_340">프랑스</a></li>
+									</ul>
+									</div>
+							</li>
+							</ul>
+							<span class="blind">전체분야 메뉴 끝</span>
+						</div>
+
+						<div class="category_info">
+							<ul>
+							<li class="info1"><a href="/nboard/notice.nhn?n2_boardId=1000003511&docId=10000000000003919874" class="N=a:not.guide" ><span>구매 안내</span></a></li>
+								<li class="info2"><a href="https://help.naver.com/support/service/main.nhn?serviceNo=702" target="_blank" alt="책 도움말" title="책 도움말"  class="N=a:not.help"><span>책 도움말</span></a></li>
+								<li class="info3"><a href="/nboard/notice.nhn?n2_boardId=1000003511" class="N=a:not.list"><span>공지 사항</span></a></li>							
+								<li class="info4"><a href="/event/index.nhn" class="N=a:not.evt"><span>책 이벤트</span></a></li>
+	                     		<li class="info5 last"><a href="/mcst/mcstList.nhn" id="last_left_category" class="N=a:not.mcsb" ><span>문화체육관광부 우수도서</span></a></li>
+							</ul>							
+						</div>						<script type="text/javascript">
+				var openCategoryLayerName = "";
+				var selectedCategoryLayerName = "";
+				var timeoutObj = new Array();
+				var isIpadBrowser = ("OTHERS".search("IPAD") > -1);
+				var beforeCategoryName = "";
+				var selectedCategoryObj = null;
+				
+				
+				function divideCategoryLayer(e) {
+					selectedCategoryObj = e;
+					var objName = (e.type == "mouseover") ? e.currentElement.id : e.currentElement.name;
+					
+					if (isIpadBrowser) {
+						objName = e.currentElement.name;
+						
+						
+						if(isSameCategoryName(objName)) {
+							location.href = e.currentElement.href;
+						}
+						
+						beforeCategoryName = objName;
+						e.stop();
+					}
+					showCategoryLayer(objName);
+				}
+				
+				
+				function isSameCategoryName(currentCategoryName) {
+					return (beforeCategoryName == currentCategoryName); 
+				}
+				
+				
+				function showCategoryLayer(layerName) {
+					if (layerName == null) {
+						return;
+					}
+	
+					if (smartSearch) {
+						smartSearch.hide();
+					}
+					
+					var lastOpenCategoryLayerName = openCategoryLayerName;
+					openCategoryLayerName = layerName;
+					
+					clearTimeout(timeoutObj[layerName]);
+					hideCategoryLayerByName(lastOpenCategoryLayerName);
+					
+				 	if (selectedCategoryLayerName != "" && layerName == selectedCategoryLayerName) {
+						removeClass(document.getElementById(selectedCategoryLayerName), "selected");
+					}
+					
+				 	addClass(document.getElementById(layerName), "over");
+					
+					if (document.getElementById(layerName).offsetTop < 70) {
+						document.getElementById("sub_" + layerName).style.top = document.getElementById(layerName).offsetTop * (-1) + 'px';
+					} else if (document.getElementById(layerName).offsetTop + document.getElementById("sub_" + layerName).offsetHeight > 540) {
+						document.getElementById("sub_" + layerName).style.top = 540 - document.getElementById(layerName).offsetTop - document.getElementById("sub_" + layerName).offsetHeight + 'px';
+					}
+				}
+				
+				
+				function hideCategoryLayer(e) {
+					beforeCategoryName = "";
+					selectedCategoryObj = null;
+					
+					var objName = "";
+					var isIpadCloseBtn = false;
+					
+					if (e.className != undefined) { 
+						objName = "lc_340";
+					} else if (e.type == "keydown") {
+						objName = "lc_100";
+					} else { 
+						objName = (isIpadBrowser)? e.currentElement.name : e.currentElement.id;
+						isIpadCloseBtn = (e.currentElement.className.search("btn_close") > -1)
+					}
+					
+					if (isIpadCloseBtn) {
+						e.stop();
+						objName = e.currentElement.name.substr(4);
+					}
+					clearTimeout(timeoutObj[objName]);
+					timeoutObj[objName] = setTimeout('hideCategoryLayerByName("' + objName + '", true)',50);
+				}
+				
+				
+				function hideCategoryLayerByName(objName, removeHistory) {
+					if (removeHistory == true) {
+						openCategoryLayerName = "";
+					}
+					if (objName != "" && openCategoryLayerName != objName) {
+						var layerObj = document.getElementById(objName);
+						if(hasClass(layerObj, "over")) {
+							if (selectedCategoryLayerName != "" && objName == selectedCategoryLayerName) {
+								addClass(document.getElementById(selectedCategoryLayerName), "selected");
+							}
+							removeClass(layerObj, "over");
+							removeClass(document.getElementById("sub_" + objName), "over");
+							clearTimeout(timeoutObj[objName]);
+						}
+					}
+				}
+				
+				
+				function makeCategoryLink() {
+					
+					var parentCategory = $$("#left_category a[cate$=0]");
+					for (var i = 0, end = parentCategory.length; i < end; i++) {
+						var cateCode = $Element(parentCategory[i]).attr("cate");
+						$Element(parentCategory[i]).attr("href", "/category/index.nhn?cate_code=" + cateCode);
+					}
+					
+					
+					var childCategory = $$("#left_category div[id^=sub_lc_] a");
+					for (var i = 0, end = childCategory.length; i < end; i++) {
+						var cateCode = $Element(childCategory[i]).attr("cate");
+						$Element(childCategory[i]).addClass("N=a:cat." + cateCode);
+					}
+				}
+				
+				
+				function makeCategoryEventHandler() {					
+					if (isIpadBrowser == true) {
+						$Fn(divideCategoryLayer, this).attach($$("#left_category a[class^=item]"), "click");
+						$Fn(hideCategoryLayer, this).attach($$("#left_category a.btn_close"), "click"); /** [x]버튼 */
+					} else {
+						var targetObj = $$("#left_category li[id^=lc_]");
+						var focusObj = $$("#left_category li[id^=lc_] > a");
+						
+						$Fn(divideCategoryLayer, this).attach(targetObj, "mouseover");
+						$Fn(divideCategoryLayer, this).attach(focusObj, "focus");
+						$Fn(hideCategoryLayer, this).attach(targetObj, "mouseout");
+					}
+				}
+			</script>
+			<script type="text/javascript">
+						makeCategoryLink();
+						makeCategoryEventHandler();	
+					</script>
+				</div>
+		<script type="text/javascript">
+		function showMobilePopup() {
+			var phones = ["iphone", "galaxyS"];
+			var i = Math.floor(Math.random() * 10 + 1) % phones.length;
+			window.open("http://mobile.naver.com/mobileweb/popup_" + phones[i] + ".nhn?app=book", "myWindow", "status = 1, height = 645, width = 375, resizable = 0, scrollbars=no");
+		}
+
+		function blockChk(ascode) { 
+			var aa;
+			if (ascode == "nbooks") { 
+				aa = "http://webmsg.naver.com/popup_send/send_url.php?code=" + ascode + "&msg=http://me2.do/books&SMSID=ESW00017&MMSID=EMG00005";
+			} else { 
+				location.href='#nofocus'; 
+				aa = "http://webmsg.naver.com/popup_send/send_url.php?code=" + ascode + "&SMSID=ESW00017&MMSID=EMG00005";	
+			}
+			 
+			window.open(aa,"pop_alert","toolbar=no,scrollbars=no ,width=285,height=402,top=100,left=100"); 
+			
+			return false; 
+		}
+		</script>
+	</div>
+
+	<div id="container" class="type3">
+
+			<div id="aside">
+			</div>
+
+			<script type="text/javascript">
+var ccsrv = "cc.naver.com";
+var nclk_evt = 3;
+
+nclk_do();
+
+function emptyImg(obj) {
+	obj.src = "http://static.naver.net/book/image/noimg4.gif";
+	obj.width = "106";
+	obj.height = "154";
+}
+</script>
+<div id="content">
+	<div id="start" class="blind"><a name="start" href="#">본문시작</a></div>
+	<div class="location">
+		<h2 class="blind">초등3~4학년</h2>
+		<ul class="navi">
+		<li class="home"><a id="home_navi" href="/index.nhn">책 홈</a></li>
+		<li>&gt;</li>
+				<li class="select">
+					<a href="#" id="category_location1_depth" onclick="showLocationLayer('location1_depth');return false;" onMouseOut="hideLocationLayer('location1_depth')">어린이</a>
+				</li>
+			<li>&gt;</li>
+				<li class="select2">
+					<a href="#" id="category_location2_depth" onclick="showLocationLayer('location2_depth');return false;" onMouseOut="hideLocationLayer('location2_depth')">초등3~4학년</a>
+				</li>
+			</ul>
+		<!-- layer -->
+		<div id="location1_depth" class="layer_select" style="left:0px; display:none;" onMouseOver="showLocationLayer('location1_depth')" onMouseOut="hideLocationLayer('location1_depth')">
+			<span class="blind">다른 분야 선택</span>
+			<ul><li><a href='http://book.naver.com/category/index.nhn?cate_code=100' class='N=a:bil.category1,i:100'>소설</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=110' class='N=a:bil.category1,i:110'>시/에세이</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=160' class='N=a:bil.category1,i:160'>경제/경영</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=170' class='N=a:bil.category1,i:170'>자기계발</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=120' class='N=a:bil.category1,i:120'>인문</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=190' class='N=a:bil.category1,i:190'>역사/문화</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=180' class='N=a:bil.category1,i:180'>사회</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=250' class='N=a:bil.category1,i:250'>과학/공학</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=210' class='N=a:bil.category1,i:210'>예술/대중문화</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=200' class='N=a:bil.category1,i:200'>종교</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=310' class='N=a:bil.category1,i:310'>유아</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=320' class='N=a:bil.category1,i:320'>어린이</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=130' class='N=a:bil.category1,i:130'>가정/생활/요리</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=140' class='N=a:bil.category1,i:140'>건강</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=150' class='N=a:bil.category1,i:150'>취미/레저</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=270' class='N=a:bil.category1,i:270'>여행/지도</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=230' class='N=a:bil.category1,i:230'>국어/외국어</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=240' class='N=a:bil.category1,i:240'>사전</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=280' class='N=a:bil.category1,i:280'>컴퓨터/IT</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=300' class='N=a:bil.category1,i:300'>청소년</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=220' class='N=a:bil.category1,i:220'>학습/참고서</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=260' class='N=a:bil.category1,i:260'>취업/수험서</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=330' class='N=a:bil.category1,i:330'>만화</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=290' class='N=a:bil.category1,i:290'>잡지</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=340' class='N=a:bil.category1,i:340'>해외도서</a></li></ul>
+		</div>
+		<div id="location2_depth" class="layer_select layer2" style="left:0px; display:none;" onMouseOver="showLocationLayer('location2_depth')" onMouseOut="hideLocationLayer('location2_depth')">
+			<ul><li><a href='http://book.naver.com/category/index.nhn?cate_code=320010' class='N=a:bil.category2,i:320010'>초등1~2학년</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=320020' class='N=a:bil.category2,i:320020'>초등3~4학년</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=320030' class='N=a:bil.category2,i:320030'>초등5~6학년</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=320040' class='N=a:bil.category2,i:320040'>어린이(공통)</a></li><li><a href='http://book.naver.com/category/index.nhn?cate_code=320050' class='N=a:bil.category2,i:320050'>어린이영어</a></li></ul>
+		</div>
+		</div>
+	<script type="text/javascript">
+		var openLocationLayerName = "";
+	
+		function showLocationLayer(layerName) {
+			if (layerName == null) {
+				return false;
+			}
+		
+			document.getElementById(layerName).style.left = ((document.getElementById("category_" + layerName).offsetLeft + document.getElementById("category_" + layerName).parentNode.offsetLeft) - 7) + "px";
+		
+			openLocationLayerName = layerName;
+		
+			var layerObj = document.getElementById(layerName);
+			layerObj.style.display = '';
+			
+			var subLocationList = $$("#" + openLocationLayerName + " > ul > li a");
+			subLocationList[0].focus(); //  첫 번째 레이어에 포커스
+
+			
+			$Fn(function(event) { // 드롭다운 리스트의 첫 번째 리스트
+				var key = event.key();
+				var TAB_KEY_CODE = 9;
+				if (key.shift == true && key.keyCode == TAB_KEY_CODE) {
+					hideLocationLayer(openLocationLayerName);
+					$("category_" + layerName).focus();
+					event.stopDefault();
+				}
+			}).attach(subLocationList[0], "keydown"); 
+			
+			$Fn(function (event) { // 드롭다운 리스트의 마지막 리스트
+				var key = event.key();
+				
+				if (key.shift != true && key.keyCode == 9) {
+					var depth = new Number(openLocationLayerName.charAt(8));
+					var nextLocationDepth = "category_location" + (depth + 1) + "_depth";
+	
+					if (depth != 4 && ($(nextLocationDepth) != null) ) {
+						$(nextLocationDepth).focus();
+						event.stopDefault();
+					}
+					hideLocationLayer(openLocationLayerName);
+				}
+			}).attach(subLocationList[subLocationList.length - 1], "keydown");
+		}
+		
+		function setLayerClassName(objName, className) {
+			document.getElementById(objName).className = className;
+		}
+		
+		function hideLocationLayer(objName) {
+			if (objName == null) {
+				return false;
+			}
+		
+			openLocationLayerName = "";
+			setTimeout('hideLocationLayerByName("' + objName + '")',50);
+		}
+		
+		function hideLocationLayerByName(objName) {
+			if (openLocationLayerName != objName) {
+				var layerObj = document.getElementById(objName);
+				layerObj.style.display = 'none';
+			}
+		}
+	</script>
+<div id="family_category" class="category_detail">
+			<h3 class="blind">초등3~4학년 분야 하위 분류</h3>
+<div class="category_detail_inner">
+					<h3 class="selected"><a href='http://book.naver.com/category/index.nhn?cate_code=320020'>초등3~4학년</a></h3>
+					<ul name="320020">
+				<li class=""><a href="http://book.naver.com/category/index.nhn?cate_code=320020030">교양/취미</a></li>
+					<li class=""><a href="http://book.naver.com/category/index.nhn?cate_code=320020010">어린이동화</a></li>
+					<li class=""><a href="http://book.naver.com/category/index.nhn?cate_code=320020020">학습/학습만화</a></li>
+					</ul>
+					</div>
+						</div>
+
+			<script type="text/javascript">
+				var only2Depth = "false";
+				var displayCols = "3" * 1;
+				var displayTop = "1" * 1;
+				var listCate = $("family_category");
+				var cate1Depth = '320';
+				var openLayerName = "";
+
+				function initFamilyCategory() {
+					listCate = document.getElementById("family_category");
+
+					if ( displayTop == 1 ) {
+						addClass(listCate, "category_list");
+					} else {
+						var displayDiv = listCate.getElementsByTagName("div");
+						var displayDivLength = displayDiv.length;
+
+						var cols = 4;
+
+						if ( displayCols >= 5 && displayCols <= 7) {
+							addClass(listCate, "category_col5");
+							cols = 5;
+						} else {
+							addClass(listCate, "category_col4");
+						}
+
+						if (displayDivLength > 5 && displayDivLength <= (displayDivLength + (displayDivLength / cols) -1)) {
+
+							for(var i = 1; i <= displayDivLength-1 ; i++) {
+								if ((i % cols == 0) && !hasClass(displayDiv[i], "nodepth")) {
+
+									var addDiv = document.createElement("div");
+
+									if (cols == 4) {
+										addDiv.className = "category_line";
+									} else {
+										addDiv.className = "category_clear";
+									}
+
+									if (i == displayDivLength - 1) {
+										//listCate.appendChild(addDiv);
+									} else {
+										listCate.insertBefore(addDiv, displayDiv[  (i-1)+(   (i / cols)-1)   ].nextSibling);
+									}
+								}
+							}
+						}
+
+						if (displayDivLength > 6 && only2Depth != "true") {
+							addClass(listCate, "category_fold");
+							if (document.getElementById("btn_toggle_fold")) {
+								document.getElementById("btn_toggle_fold").alt = "초등3~4학년 영역펼치기";
+								document.getElementById("btn_toggle_fold").title = "초등3~4학년 영역펼치기";
+							}
+						} else {
+							addClass(listCate, "category_unfold");
+							if (document.getElementById("btn_toggle_fold")) {
+								document.getElementById("btn_toggle_fold").alt = "초등3~4학년 영역접기";
+								document.getElementById("btn_toggle_fold").title = "초등3~4학년 영역접기";
+							}
+						}
+					}
+				}
+
+				function toggleFamilyCategory() {
+					listCate = document.getElementById("family_category");
+
+					if ( hasClass(listCate, "category_unfold") ) {
+						addClass(listCate, "category_fold");
+						removeClass(listCate, "category_unfold");
+						if (document.getElementById("btn_toggle_fold")) {
+							document.getElementById("btn_toggle_fold").alt = "초등3~4학년 영역펼치기";
+							document.getElementById("btn_toggle_fold").title = "초등3~4학년 영역펼치기";
+						}
+					} else {
+						addClass(listCate, "category_unfold");
+						removeClass(listCate, "category_fold");
+						if (document.getElementById("btn_toggle_fold")) {
+							document.getElementById("btn_toggle_fold").alt = "초등3~4학년 영역접기";
+							document.getElementById("btn_toggle_fold").title = "초등3~4학년 영역접기";
+						}
+					}
+					hideBuyLayer();
+					$("toggleFamilyCategory").focus();
+				}
+
+				function showDepthLayer(obj) {
+					if (obj == null) {
+						return;
+					}
+
+					var layerObj = $("4depth_layer_" + obj.getAttribute("catecode"));
+
+					if (layerObj.style.left == 0 || layerObj.style.left == "0px") {
+						if (displayTop > 1) {
+							layerObj.style.left = (obj.parentNode.parentNode.parentNode.offsetLeft + obj.offsetWidth + 5) + "px";
+							layerObj.style.top = (obj.parentNode.offsetTop - 43 + ((bIE && bIEVer < 8) ? obj.parentNode.parentNode.offsetTop : 0)) + "px";
+						} else {
+							layerObj.style.left = (obj.parentNode.offsetLeft + obj.offsetWidth + 30 - (bIE ? 0 : obj.parentNode.parentNode.offsetLeft)) + "px";
+							layerObj.style.top = (obj.parentNode.offsetTop - 43 + ((bIE && bIEVer < 8) ? obj.parentNode.parentNode.offsetTop : 0)) + "px";
+						}
+					}
+					showLayerByName("4depth_layer_" + obj.getAttribute("catecode"));
+				}
+
+				function showLayerByName(layerName) {
+					openLayerName = layerName;
+
+					var layerObj = $(layerName);
+					layerObj.style.display = '';
+				}
+
+				function hideDepthLayer(obj) {
+					if (obj == null) {
+						return;
+					}
+
+					openLayerName = "";
+					setTimeout('hideDepthLayerByName("4depth_layer_' + obj.getAttribute("catecode") + '")',50);
+				}
+
+				function hideDepthLayerByName(objName) {
+					if (openLayerName != objName) {
+						var layerObj = $(objName);
+						layerObj.style.display = 'none';
+					}
+				}
+
+				initFamilyCategory();
+			</script>
+<div class='tab_category tab_sub'>
+		<ul>
+			<li class="first"><a href="http://book.naver.com/category/index.nhn?cate_code=320020&list_type=list&tab=top100" class="N=a:bta.all"><img src="http://static.naver.net/book/image/tab_sub_top100.gif" alt="TOP 100" title="TOP 100" width="206" height="80"></a></li>
+					<li class="selected"><a href="http://book.naver.com/category/index.nhn?cate_code=320020&list_type=list&tab=new_book" class="N=a:bta.all"><img src="http://static.naver.net/book/image/tab_sub_new.gif" alt="신간도서" title="신간도서" width="210" height="80"></a> <em class="total_new">200</em></li>
+					<li class=""><a href="http://book.naver.com/category/index.nhn?cate_code=320020&list_type=list&tab=recommend" class="N=a:bta.all"><img src="http://static.naver.net/book/image/tab_sub_recom.gif" alt="추천도서" title="추천도서" width="210" height="80"></a> <em class="total_recom">234</em></li>
+					<li class=""><a href="http://book.naver.com/category/index.nhn?cate_code=320020&list_type=list&tab=steady_seller" class="N=a:bta.all"><img src="http://static.naver.net/book/image/tab_sub_seller.gif" alt="스테디셀러" title="스테디셀러" width="210" height="80"></a> <em class="total_seller">283</em></li>
+					<h3 class="blind">신간도서</h3>
+		</ul>
+	</div>
+	<!-- Don't remove this comment(success). -->
+					<div id="buy_layer" class="layerpopup">
+	<div class="content" style="width:305px;">
+		<div class="lyr_milage" style="left:3px;top:0px">
+			<strong class="blind">구매 레이어</strong>
+			<dl>
+			<dt id="buy_layer_title">도서 구매</dt>
+			<dd><ul id="buy_list" class="buy_list"></ul></dd>
+			</dl>
+			<div class="buy_tip" id="buy_tip"></div>
+			<a href="#" onclick="return hideBuyLayer();" onblur="return hideBuyLayer();" class="btn_close" title="닫기" alt="닫기">구매 레이어 닫기</a>
+		</div>
+	</div>
+</div>
+<div id="need_adult_layer" class="layerpopup">
+	<div class="content" style="width:290px;">
+		<div class="body">
+			<div class="notice">
+				<p class="txt"><strong>성인 인증 이후 요청하신 구매 정보를<br> 이용하실 수 있습니다.</strong></p>
+				<p class="txt">본 정보 내용은 정보통신망이용촉진 및 정보보호 등에 관한 법률 및 청소년보호법의 규정에 의하여 만 19세 미만의 청소년이 이용할 수 없습니다.</p>
+				<div style="padding:3px 0"><a href="https://nid.naver.com/nidlogin.login?viewtype=2&svctype=128&url=http%3A%2F%2Fbook.naver.com%2FWEB-INF%2Fpages%2Fcategory%2Fcategory.jsp%3Fcate_code%3D320020%26list_type%3Dlist%26tab%3Dnew_book%26page%3D5" class="link">네이버 성인인증</a></div>
+			</div>
+			<a href="javascript:hidePopUpLayer($('need_adult_layer'));" class="closelayer"><img src="http://static.naver.net/book/image/btn_layer_close.gif" alt="레이어닫기" title="레이어닫기" width="17" height="34"></a>
+		</div>
+	</div>
+</div>
+<div id="only_adult_layer" class="layerpopup">
+	<div class="content" style="width:290px;">
+		<div class="body">
+			<div class="notice">
+				<p class="txt"><strong>19세 이상의 실명 인증된 회원만<br> 이용하실 수 있습니다.</strong></p>
+				<p class="txt">본 정보 내용은 정보통신망이용촉진 및 정보보호 등에 관한 법률 및 청소년보호법의 규정에 의하여 만 19세 미만의 청소년이 이용할 수 없습니다.</p>
+			</div>
+			<a href="javascript:hidePopUpLayer($('only_adult_layer'));" class="closelayer"><img src="http://static.naver.net/book/image/btn_layer_close.gif" alt="레이어닫기" title="레이어닫기" width="17" height="34"></a>
+		</div>
+	</div>
+</div>
+<div class="option_search" style="margin-top:0;">
+				<ul class="sort_type" id="categoryBiblioList">
+				<li class="sort2"><strong><a href="http://book.naver.com/category/index.nhn?cate_code=320020&tab=new_book&list_type=list&sort_type=publishday" class="N=a:bta.date"><span>출간일순</span></a></strong><span class="blind">선택됨</span></li>
+				<li class="sort3"><a href="http://book.naver.com/category/index.nhn?cate_code=320020&tab=new_book&list_type=list&sort_type=salecount" class="N=a:bta.sale"><span>판매량순</span></a></li>
+				</ul>
+
+				<div class="sort_type2">
+					<span>
+							<a href="#" class="on N=a:bta.vielis"><img src="http://static.naver.net/book/image/btn_list_view.gif" alt="리스트형보기" title="리스트형보기" width="21" height="38"><span class="blind">선택됨</span></a><a href="http://book.naver.com/category/index.nhn?cate_code=320020&list_type=album&tab=new_book&sort_type=publishday&page=5" class="off N=a:bta.viethu"><img src="http://static.naver.net/book/image/btn_cover_view.gif" alt="이미지형보기" title="이미지형보기" width="21" height="38"></a>
+						</span>
+					</div>
+			</div>
+
+			<div id="category_section" class="category_section category_section2">
+				<ol class='basic'><li>
+							<p class="rank_view"><span class="no8"></span><span class="no1"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349075" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349075.jpg?type=m1" alt="Wow 두근두근 뷰티센스" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_0">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349075">Wow 두근두근 뷰티센스</a> (와우)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%96%91%EB%8F%99%EC%84%9D&frameFilterType=1&frameFilterValue=34881" class="txt_name N=a:bta.author"> 양동석</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349075">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349075" href="javascript:showBuyLayerByBid('8349075')" onclick="return showAdultLayer('8349075', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349075" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_0"><span class="txt_g1">소개</span>
+							Wow 두근두근 시리즈. 이성 친구에 관한 이야기를 만화로 풀어내어 재미를 더하였고, 실제로 이성 친구를 만나면서 일어날 수 있는 여러 가지 상황에 대한 해결책을 제시하고 있어서 어린이들에게 올바른 이성 교제 인식을 심어줄 수 있다.
+
+자신의 능력이나 외모에 관심을 가지고 꾸미는 것은, 이성 친구 때문만이 아니라 자신만의 매력을 찾고 자기 스스로를 좀 더 사랑하기 위해서 더 필요하다는 주제를 담고 있다. 책 중간에 정보 페이지를 구성하여 이야기에 나오는 상황이나 장소에 어울리는 뷰티, 코디, 데이트 지식을 상세하게 알</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_0");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_0")) {
+								summarizeBasicIntro(document.getElementById("book_intro_0"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no2"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349072" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349072.jpg?type=m1" alt="흥미로운 특급지식 세계역사문화" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_1">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349072">흥미로운 특급지식 세계역사문화</a> (Wow 뉴스가 확 보이는)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%A1%B0%ED%95%AD%EB%A1%9D&frameFilterType=1&frameFilterValue=5000016887" class="txt_name N=a:bta.author"> 조항록</a>(시인) 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EA%B9%80%ED%98%84%EA%B2%BD&frameFilterValue=" class="txt_name N=a:bta.illustrator">김현경</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349072">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349072" href="javascript:showBuyLayerByBid('8349072')" onclick="return showAdultLayer('8349072', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349072" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_1"><span class="txt_g1">소개</span>
+							이 책은 52개국의 역사와 문화에 대한 지식을 알기 쉽게 구성하였습니다. 각 나라에 대한 지식을 줄줄이 나열하지 않고, 주제별로 나누어 재미있게 그림와 함께 이야기를 풀어 놓았어요. 또한, 책 속에 등장하는 ‘월드박사’와 어린이들이 세계의 지식을 알기 위해 이야기 여행을 떠나는 형식으로 구성되어 있어서 지루할 틈이 없답니다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_1");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_1")) {
+								summarizeBasicIntro(document.getElementById("book_intro_1"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no3"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349076" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349076.jpg?type=m1" alt="Wow 두근두근 코디센스" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_2">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349076">Wow 두근두근 코디센스</a> (와우)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%94%BD%EC%B2%98%EB%B1%85%ED%81%AC&frameFilterType=1&frameFilterValue=634079" class="txt_name N=a:bta.author"> 픽처뱅크</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349076">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349076" href="javascript:showBuyLayerByBid('8349076')" onclick="return showAdultLayer('8349076', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349076" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_2"><span class="txt_g1">소개</span>
+							『두근두근 코디센스』 슬기는 전학 간 학교에서 농구하는 민우의 모습에 반해 패션에 관심을 가지기 시작합니다. 하지만 민우 옆에는 예쁘고 세련된 여자 친구가 있는데…. 과연 슬기는 촌닭 패션에서 모델 뺨치는 패션으로 변신할 수 있을까요? 민우와 가까워질 수 있을까요?</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_2");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_2")) {
+								summarizeBasicIntro(document.getElementById("book_intro_2"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no4"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8373853" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/738/08373853.jpg?type=m1" alt="너라면 가만있겠니?" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_3">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8373853">너라면 가만있겠니?</a></dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9A%B0%EB%82%A8%ED%9D%AC&frameFilterType=1&frameFilterValue=18927" class="txt_name N=a:bta.author"> 우남희</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9D%B4%EC%B1%84%EC%9B%90&frameFilterValue=" class="txt_name N=a:bta.illustrator">이채원</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EC%B2%AD%EA%B0%9C%EA%B5%AC%EB%A6%AC">청개구리</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:80%;"></span>
+								</div>
+								8.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8373853">네티즌리뷰 1건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8373853" href="javascript:showBuyLayerByBid('8373853')" onclick="return showAdultLayer('8373853', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8373853" ></a>
+										<strike>9,500원</strike> &rarr; <em class="price">8,550원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_3"><span class="txt_g1">소개</span>
+							사물에 대한 직관을 통해 삶의 본질을 보여 주는 동시집&#x0D;
+&#x0D;
+『문학저널』과 『오늘의동시문학』으로 등단한 우남희 시인의 첫 동시집입니다. 우남희 시인의 동시는 대부분 짧은 시행 속에서 사물에 대한 직관을 보여 주는 형태를 취하고 있습니다. 박방희 시인은 이러한 우남희 시인의 시 쓰기를 “어떤 사물이나 대상에서 순간적으로 시를 찾아내는 솜씨는 놀랍기도 하고 빼어나기도 하여 가히 ‘찰나의 미학’이라 할 만하다”면서 “툭 던지는 한마디는 단번에 대상의 본질을 꿰뚫는다”고 평가했습니다. 짧지만 깊은 메시지를 담고 있는 우남</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_3");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_3")) {
+								summarizeBasicIntro(document.getElementById("book_intro_3"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no5"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8328469" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/284/08328469.jpg?type=m1" alt="웃는 얼굴 좋아서" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_4">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8328469">웃는 얼굴 좋아서</a> (홍희숙 동시집)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%99%8D%ED%9D%AC%EC%88%99&frameFilterType=1&frameFilterValue=2315793" class="txt_name N=a:bta.author"> 홍희숙</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%91%B8%EB%A5%B8%EC%82%AC%EC%83%81">푸른사상</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8328469">네티즌리뷰 2건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8328469" href="javascript:showBuyLayerByBid('8328469')" onclick="return showAdultLayer('8328469', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8328469" ></a>
+										<strike>10,000원</strike> &rarr; <em class="price">9,000원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_4"><span class="txt_g1">소개</span>
+							홍희숙 시인은 코스모스와 닮았다. 코스모스는 키가 크고 연약한 가을꽃이다. 그렇지만 바람에 꺾이거나 휘지 않는 유연함을 가지고 있다. 그런 유연함으로 긴 목 위에 송이송이 꽃을 피운다. 시인과 코스모스에 대한 이러한 느낌은 이번 작품집 곳곳에서 식물성 이미지로 나타난다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_4");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_4")) {
+								summarizeBasicIntro(document.getElementById("book_intro_4"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no6"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8339822" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/398/08339822.jpg?type=m1" alt="구스범스 6" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_5">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8339822">구스범스 6</a> (미라의 저주,용기가 UP되는 책)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=R.+L.+%EC%8A%A4%ED%83%80%EC%9D%B8&frameFilterType=1&frameFilterValue=64999" class="txt_name N=a:bta.author"> R. L. 스타인</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%99%8D%EC%A0%95%EC%84%A0&frameFilterValue=" class="txt_name N=a:bta.illustrator">홍정선</a> 그림
+									<span class="bar">|</span>
+									<a href="http://book.naver.com/search/search.nhn?query=%EB%85%B8%EC%9D%80%EC%A0%95&frameFilterValue=" class="txt_name N=a:bta.translator">노은정</a> 역
+								<span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EA%B3%A0%EB%A6%B4%EB%9D%BC%EB%B0%95%EC%8A%A4%28%EB%B9%84%EB%A3%A1%EC%86%8C%29">고릴라박스(비룡소)</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8339822">네티즌리뷰 4건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8339822" href="javascript:showBuyLayerByBid('8339822')" onclick="return showAdultLayer('8339822', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8339822" ></a>
+										<strike>8,500원</strike> &rarr; <em class="price">7,650원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_5"><span class="txt_g1">소개</span>
+							자신의 부정적 감정을 극복하도록 안내해주는 책!아이들에게 오싹한 즐거움을 선사해주는 본격 호러 동화 『구스범스』 제6권 《미라의 저주》. 영어로 ‘소름’이라는 뜻을 지난 구스범스 시리즈는 1992년 미국에서 첫 출간된 ...</dd>
+							<!-- 연관도서 노출 -->
+							<dd class="txt_block txt_block2"><span class="theme">연관도서</span>
+							<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8339822#seriesRelation" target="_blank" class="N=a:bta.series,r:80,i:98000001_0000000000000000007F416E">시리즈</a></dd>
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_5");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_5")) {
+								summarizeBasicIntro(document.getElementById("book_intro_5"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no7"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349073" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349073.jpg?type=m1" alt="Wow 내 남자친구가 되어줄래?" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_6">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349073">Wow 내 남자친구가 되어줄래?</a> (와우)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EA%B5%AC%EB%AF%B8%EB%82%98&frameFilterType=1&frameFilterValue=621409" class="txt_name N=a:bta.author"> 구미나</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349073">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349073" href="javascript:showBuyLayerByBid('8349073')" onclick="return showAdultLayer('8349073', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349073" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_6"><span class="txt_g1">소개</span>
+							Wow 두근두근 시리즈. 이성 친구에 관한 이야기를 만화로 풀어내어 재미를 더하였고, 실제로 이성 친구를 만나면서 일어날 수 있는 여러 가지 상황에 대한 해결책을 제시하고 있어서 어린이들에게 올바른 이성 교제 인식을 심어줄 수 있다.
+
+아기자기하고 예쁜 그림을 바탕으로 이성 교제에 관한 내용을 만화로 재미있게 읽을 수 있으며, 사랑을 이루는 주문, 혈액형 또는 별자리에 따른 성격, 데이트 할 때 어울리는 머리 모양, 러브장 쓰는 방법 등 다양한 정보가 들어 있다. 커플 등록증, 편지지, 편지봉투 등 직접 만들어 쓸 수</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_6");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_6")) {
+								summarizeBasicIntro(document.getElementById("book_intro_6"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no8"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8337362" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/373/08337362.jpg?type=m1" alt="김대중" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_7">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8337362">김대중</a> (행동하는 양심)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%86%90%ED%99%8D%EA%B7%9C&frameFilterType=1&frameFilterValue=5000010411" class="txt_name N=a:bta.author"> 손홍규</a>(소설가) 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EA%B9%80%ED%99%8D%EB%B3%B4&frameFilterValue=" class="txt_name N=a:bta.illustrator">김홍보</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%95%9C%EA%B2%A8%EB%A0%88%EC%95%84%EC%9D%B4%EB%93%A4">한겨레아이들</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8337362">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8337362" href="javascript:showBuyLayerByBid('8337362')" onclick="return showAdultLayer('8337362', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8337362" ></a>
+										<strike>10,000원</strike> &rarr; <em class="price">9,000원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_7"><span class="txt_g1">소개</span>
+							어린이를 위한 인물 평전 ‘한겨레 인물탐구’ 시리즈 11권 &#x0D;
+&#x0D;
+어린이들이 국내외 주요 인물의 생애를 통해 시대의 흐름과 가치를 볼 수 있게 돕는 ‘한겨레 인물탐구’ 시리즈가 새 책 《김대중, 행동하는 양심》을 내놓았습니다. ‘한겨레 인물탐구’는 그동안 김구, 간디, 다윈, 제인 구달, 윤동주, 공병우 등 현대사의 굵직굵직한 인물 10명을 소개했습니다. 열한 번째 인물은 바로 대한민국 15대 대통령이자 노벨평화상 수상자인 김대중입니다.&#x0D;
+&#x0D;
+이 책은 우리나라 최초로 수평적 정권 교체를 이루어 1</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_7");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_7")) {
+								summarizeBasicIntro(document.getElementById("book_intro_7"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no8"></span><span class="no9"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349074" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349074.jpg?type=m1" alt="Wow 두근두근 데이트 센스" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_8">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349074">Wow 두근두근 데이트 센스</a> (와우)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%96%91%EB%8F%99%EC%84%9D&frameFilterType=1&frameFilterValue=34881" class="txt_name N=a:bta.author"> 양동석</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349074">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349074" href="javascript:showBuyLayerByBid('8349074')" onclick="return showAdultLayer('8349074', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349074" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_8"><span class="txt_g1">소개</span>
+							이성에 대한 호기심이 높은 초등학교 고학년 여학생을 주인공으로 설정하여, 마음에 드는 이성 친구를 만나서 가까워지는 과정을 구체적으로 담아냈기 때문에 비슷한 또래의 어린이들이 흥미롭게 읽을 수 있다. 또한이성 친구에 관한 이야기를 만화로 풀어내어 재미를 더하였고, 실제로 이성 친구를 만나면서 일어날 수 있는 여러 가지 상황에 대한 해결책을 제시하고 있어서 어린이들에게 올바른 이성 교제 인식을 심어줄 수 있다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_8");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_8")) {
+								summarizeBasicIntro(document.getElementById("book_intro_8"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no0"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349071" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/490/08349071.jpg?type=m1" alt="재미있는 특급지식 세계정치" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_9">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8349071">재미있는 특급지식 세계정치</a> (Wow 토론이 쉬워지는)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%A0%95%EC%A7%80%EC%98%81&frameFilterType=1&frameFilterValue=3104" class="txt_name N=a:bta.author"> 정지영</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EA%B9%80%EC%9D%80%EC%9E%AC&frameFilterValue=" class="txt_name N=a:bta.illustrator">김은재</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8349071">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8349071" href="javascript:showBuyLayerByBid('8349071')" onclick="return showAdultLayer('8349071', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8349071" ></a>
+										<strike>9,900원</strike> &rarr; <em class="price">8,910원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_9"><span class="txt_g1">소개</span>
+							이 책은 크게 역사 속 민주주의 이야기, 현대의 정치 제도, 현대의 정치 이슈, 이렇게 세 가지로 나누어 구성되었어요. 역사 속에서, 현실 속에서 일어나고 있는 일들을 담고 있기 때문에, 책을 읽으면서 여러 상황에서 여러분이라면 어떻게 행동할지, 어떤 게 가장 올바른 방법일지 자신의 생각을 정리해 보세요. 생각하고 토론하는 힘을 키워줄 거예요!</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_9");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_9")) {
+								summarizeBasicIntro(document.getElementById("book_intro_9"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no1"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8276247" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/082/762/08276247.jpg?type=m1" alt="라바의 세상살이 2" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_10">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8276247">라바의 세상살이 2</a> (라바 작은 동화집,함께하면 이겨 낼 수 있어)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%88%AC%EB%B0%94%EC%95%A4&frameFilterType=1&frameFilterValue=2462423" class="txt_name N=a:bta.author"> 투바앤</a>, <a href="http://book.naver.com/search/search.nhn?query=%ED%99%A9%EC%9A%94%EA%B2%BD&frameFilterType=1&frameFilterValue=2444817" class="txt_name N=a:bta.author"> 황요경</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%98%95%EC%84%A4%EC%95%84%EC%9D%B4">형설아이</a><span class="bar"> | </span>2014.10.31</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8276247">네티즌리뷰 1건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8276247" href="javascript:showBuyLayerByBid('8276247')" onclick="return showAdultLayer('8276247', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8276247" ></a>
+										<strike>9,500원</strike> &rarr; <em class="price">8,550원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_10"><span class="txt_g1">소개</span>
+							작은 애벌레 라바의 세상살이 이야기!&#x0D;
+&#x0D;
+레드와 옐로우가 하수구를 벗어나 밝은 볕이 드는 집에서 살게 되었어요. 매일매일 햇살이 가득 들어와서 따뜻하고, 먹을 것도 아주 많아서 레드와 옐로우는 아주 행복한 생활...</dd>
+							<!-- 연관도서 노출 -->
+							<dd class="txt_block txt_block2"><span class="theme">연관도서</span>
+							<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8276247#seriesRelation" target="_blank" class="N=a:bta.series,r:80,i:98000001_0000000000000000007E4917">시리즈</a></dd>
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_10");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_10")) {
+								summarizeBasicIntro(document.getElementById("book_intro_10"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no2"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8364501" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/645/08364501.jpg?type=m1" alt="고모는 안드로이드" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_11">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8364501">고모는 안드로이드</a></dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EB%8B%88%EC%BD%9C%EB%9D%BC%EC%8A%A4+%EC%95%A8%EB%9F%B0&frameFilterType=1&frameFilterValue=66886" class="txt_name N=a:bta.author"> 니콜라스 앨런</a> 저 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EB%85%B8%EC%98%81%EC%A3%BC&frameFilterValue=" class="txt_name N=a:bta.translator">노영주</a> 역
+								<span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EA%B5%AD%EB%AF%BC%EC%84%9C%EA%B4%80">국민서관</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8364501">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8364501" href="javascript:showBuyLayerByBid('8364501')" onclick="return showAdultLayer('8364501', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8364501" ></a>
+										<strike>10,000원</strike> &rarr; <em class="price">9,000원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_11"><span class="txt_g1">소개</span>
+							&lt;b&gt;주어진 상황에 굴복하지 않는 남매의 기지를 엿볼 수 있는 책!&lt;/b&gt;&#x0D;
+&#x0D;
+빌리, 알피 남매는 부모님을 잃고 괴짜인 에드나 고모와 함께 살게 된 후로 하고 싶은 것을 마음대로 하던 생활에서 벗어나 험난한 생활을 하게 됩니다. 남매를 돌본다는 목적으로 괴상한 기계만 만들던 에드나 고모는 결국 자신과 똑 닮은 감시용 유모 로봇, '안드로이드 고모'를 만들어 내고 말지요.&#x0D;
+&#x0D;
+하지만 남매는 온갖 시련에도 굴복하지 않고 씩씩하게 생활합니다. 우연한 계기에 안드로이드 고모를 조</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_11");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_11")) {
+								summarizeBasicIntro(document.getElementById("book_intro_11"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no3"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8316606" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/166/08316606.jpg?type=m1" alt="나, 쿠키" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_12">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8316606">나, 쿠키</a> (Me, the Cookie,이재복 동시집)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9D%B4%EC%9E%AC%EB%B3%B5&frameFilterType=1&frameFilterValue=35644" class="txt_name N=a:bta.author"> 이재복</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EB%A5%98%EC%97%AC%EB%A6%BC&frameFilterValue=" class="txt_name N=a:bta.illustrator">류여림</a> 그림
+									<span class="bar">|</span>
+									<a href="http://book.naver.com/search/search.nhn?query=%EC%B5%9C%EC%A7%80%ED%98%9C&frameFilterValue=" class="txt_name N=a:bta.translator">최지혜</a> 역
+								<span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EA%B0%80%EB%AC%B8%EB%B9%84%EC%96%B4%EB%A6%B0%EC%9D%B4">가문비어린이</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8316606">네티즌리뷰 7건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8316606" href="javascript:showBuyLayerByBid('8316606')" onclick="return showAdultLayer('8316606', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8316606" ></a>
+										<strike>9,500원</strike> &rarr; <em class="price">8,550원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_12"><span class="txt_g1">소개</span>
+							어린이 우수작품집 시리즈 6권. 서울 서원초등학교 5학년 이재복 어린이의 동시집이다. 독자들과의 공통된 심리가 아주 잘 표현되어 있는 재미있는 어린이 동시집이며, 영문으로 번역한 동시가 함께 실려 있어 영어공부도 같이 할 수 있도록 꾸며져 있는 한글·영어동시집이다. 이재복 어린이는 이번 동시집에서 매우 탁월한 시적 성장을 보이고 있다. 시적 주제가 다양해졌고, 재미있는 동시가 눈에 많이 띈다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_12");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_12")) {
+								summarizeBasicIntro(document.getElementById("book_intro_12"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no4"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8301320" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/013/08301320.jpg?type=m1" alt="역사 느낌표" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_13">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8301320">역사 느낌표</a> (선사시대~발해 편)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%99%A9%EC%9D%80%ED%9D%AC&frameFilterType=1&frameFilterValue=1517145" class="txt_name N=a:bta.author"> 황은희</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%95%9C%EC%A0%95%EC%9A%B0&frameFilterValue=" class="txt_name N=a:bta.illustrator">한정우</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EC%84%9C%EC%9A%B8%EB%AC%B8%ED%99%94%EC%82%AC">서울문화사</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8301320">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8301320" href="javascript:showBuyLayerByBid('8301320')" onclick="return showAdultLayer('8301320', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8301320" ></a>
+										<strike>12,000원</strike> &rarr; <em class="price">10,260원(-15%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_13"><span class="txt_g1">소개</span>
+							&lt;b&gt;2017년도 수능 필수 과목 지정, 한국사!&#x0D;
+생생한 유물, 유적, 문화재 사진 100종으로 배운다 &#x0D;
+ &lt;/b&gt;&#x0D;
+역사 느낌표는 초등학생이 꼭 알아야 할 우리 역사 속 유물, 유적, 문화재를 생생한 사진과 간단명료한 설명으로 알려 줍니다.&#x0D;
+&#x0D;
+무려 100종이 넘는 사진들은 초등학교 5학년 교과서 속 문화재는 물론이고, 교과서에서 사진으로 보여 주지 못한 것들까지 포함하여 더욱 깊은 지식을 전달합니다.&#x0D;
+&#x0D;
+현직 초등 교사가 직접 집필하여 초</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_13");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_13")) {
+								summarizeBasicIntro(document.getElementById("book_intro_13"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no5"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8172686" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/081/726/08172686.jpg?type=m1" alt="우정의 규칙" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_14">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8172686">우정의 규칙</a></dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%A0%95%EB%B3%B5%ED%98%84&frameFilterType=1&frameFilterValue=13626" class="txt_name N=a:bta.author"> 정복현</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%91%B8%EB%A5%B8%EC%B1%85%EB%93%A4">푸른책들</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:100%;"></span>
+								</div>
+								9.670000076293945<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8172686">네티즌리뷰 4건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8172686" href="javascript:showBuyLayerByBid('8172686')" onclick="return showAdultLayer('8172686', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8172686" ></a>
+										<strike>11,000원</strike> &rarr; <em class="price">9,900원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_14"><span class="txt_g1">소개</span>
+							미래의 고전 시리즈, 45권. 관계와 우정의 ‘규칙’을 잃어버리기 쉬운 이 시대에 우리 아이들의 길잡이가 되어 줄 동화가 출간되었다. ‘우정’에도 ‘규칙’이 있다고 말하는 정복현 작가의 『우정의 규칙』은 친구 관계로 고민하는 아이들에게 보내는 따끔한 충고이자 따듯한 위로가 될 작품이다.
+
+한창 불안정한 시기를 겪고 있는 아이들의 관계는 어른들만큼이나, 혹은 그 이상으로 복잡하다. 하지만 현직 초등 교사인 작가는 ‘아이들이 생활하는 교실은 작은 우주’라고 이야기한다. 얼핏 보기에는 무질서해 보이지만 그 안에는 나름의 규</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_14");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_14")) {
+								summarizeBasicIntro(document.getElementById("book_intro_14"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no6"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8360424" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/604/08360424.jpg?type=m1" alt="베껴라 베껴! 한자왕 6급" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_15">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8360424">베껴라 베껴! 한자왕 6급</a></dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%8D%BC%ED%94%8C%EC%B9%B4%EC%9A%B0%EC%BD%98%ED%85%90%EC%B8%A0%ED%8C%80&frameFilterType=1&frameFilterValue=2490587" class="txt_name N=a:bta.author"> 퍼플카우콘텐츠팀</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9D%B4%EC%9A%B0%EC%9D%BC&frameFilterValue=" class="txt_name N=a:bta.illustrator">이우일</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%8D%BC%ED%94%8C%EC%B9%B4%EC%9A%B0">퍼플카우</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8360424">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8360424" href="javascript:showBuyLayerByBid('8360424')" onclick="return showAdultLayer('8360424', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8360424" ></a>
+										<strike>7,800원</strike> &rarr; <em class="price">4,460원(-43%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_15"><span class="txt_g1">소개</span>
+							나도 한자왕!초등 저학년 및 미취학 아동까지 고려한 『베껴라 베껴! 한자왕 6급』은 익살스러운 이우일 작가의 캐릭터와 재미있는 에피소드 등이 아기자기하게 배치되어 지루함을 느낄 틈 없이 한자를 익힐 수 있습니다. 한국어문회에서 주관하는 한자능력검정 시험 6급을 대비하기 위한 선정 한자 150자가 담겨 있으며(7급 선정 150자 미포함), 중간 중간 삽입된 한자 퀴즈와 기출문제를 통해 자신의 실력을 점검할 수 있어 무척 유익합니다. 베껴 쓰기만 하면 저절로 외워지는 신기한 한자책, 『베껴라 베껴! 한자왕 시리즈』로 한자</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_15");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_15")) {
+								summarizeBasicIntro(document.getElementById("book_intro_15"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no7"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8313459" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/134/08313459.jpg?type=m1" alt="고구려 벽화에는 어떤 비밀이 담겨 있을까?" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_16">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8313459">고구려 벽화에는 어떤 비밀이 담겨 있을까?</a> (채우리 지식100배 2)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9E%A5%EC%84%B8%ED%98%84&frameFilterType=1&frameFilterValue=54315" class="txt_name N=a:bta.author"> 장세현</a> 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EC%B1%84%EC%9A%B0%EB%A6%AC">채우리</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8313459">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8313459" href="javascript:showBuyLayerByBid('8313459')" onclick="return showAdultLayer('8313459', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8313459" ></a>
+										<strike>10,000원</strike> &rarr; <em class="price">9,000원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_16"><span class="txt_g1">소개</span>
+							1,500여 년 전 고구려 사람들은 무덤에 벽화를 그리면서 어떤 이야기를 하려 했던 걸까요? 그리고 지금 우리는, 그 벽화를 보면서 어떤 의미를 찾아낼 수 있을까요? 이 책은 유네스코가 지정한 세계 문화유산인 ‘고구려 고분벽화’를 통해 당시 고구려 사람들이 간직했던 숨겨진 이야기들을 생생하게 들려주고 있습니다. &#x0D;
+&#x0D;
+고구려의 ‘건국과 신화’를 그려 낸 벽화부터 ‘역사와 전쟁’, ‘상상의 동물’, ‘생활 풍속’, ‘예술과 놀이 문화’, ‘인물과 신분’까지 총 6개 마당을 통해 고구려의 힘찬 기상과 찬란한 문화를 고</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_16");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_16")) {
+								summarizeBasicIntro(document.getElementById("book_intro_16"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no8"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8360425" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/604/08360425.jpg?type=m1" alt="베껴라 베껴! 한자왕 7급" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_17">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8360425">베껴라 베껴! 한자왕 7급</a></dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%8D%BC%ED%94%8C%EC%B9%B4%EC%9A%B0%EC%BD%98%ED%85%90%EC%B8%A0%ED%8C%80&frameFilterType=1&frameFilterValue=2490587" class="txt_name N=a:bta.author"> 퍼플카우콘텐츠팀</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%9D%B4%EC%9A%B0%EC%9D%BC&frameFilterValue=" class="txt_name N=a:bta.illustrator">이우일</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%ED%8D%BC%ED%94%8C%EC%B9%B4%EC%9A%B0%EC%BD%98%ED%85%90%EC%B8%A0%EA%B7%B8%EB%A3%B9">퍼플카우콘텐츠그룹</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8360425">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8360425" href="javascript:showBuyLayerByBid('8360425')" onclick="return showAdultLayer('8360425', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8360425" ></a>
+										<strike>7,800원</strike> &rarr; <em class="price">4,460원(-43%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_17"><span class="txt_g1">소개</span>
+							나도 한자왕!초등 저학년 및 미취학 아동까지 고려한 『베껴라 베껴! 한자왕 7급』은 익살스러운 이우일 작가의 캐릭터와 재미있는 에피소드 등이 아기자기하게 배치되어 지루함을 느낄 틈 없이 한자를 익힐 수 있습니다. 한국어문회에서 주관하는 한자능력검정 시험 7급을 대비하기 위한 선정 한자 150자가 담겨 있으며(8급 선정 50자 포함), 중간 중간 삽입된 한자 퀴즈와 기출문제를 통해 자신의 실력을 점검할 수 있어 무척 유익합니다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_17");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_17")) {
+								summarizeBasicIntro(document.getElementById("book_intro_17"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no9"></span><span class="no9"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8297179" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/082/971/08297179.jpg?type=m1" alt="정약전과 정약용" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_18">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8297179">정약전과 정약용</a> (편지로 우애를 나눈 형제)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%ED%99%8D%EA%B8%B0%EC%9A%B4&frameFilterType=1&frameFilterValue=7626" class="txt_name N=a:bta.author"> 홍기운</a> 글 <span class="bar">|</span>
+								<a href="http://book.naver.com/search/search.nhn?query=%EC%A0%95%EC%A3%BC%ED%98%84&frameFilterValue=" class="txt_name N=a:bta.illustrator">정주현</a> 그림
+									<span class="bar">|</span>
+									<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EB%A8%B8%EC%8A%A4%ED%8A%B8%EB%B9%84">머스트비</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:100%;"></span>
+								</div>
+								9.880000114440918<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8297179">네티즌리뷰 17건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8297179" href="javascript:showBuyLayerByBid('8297179')" onclick="return showAdultLayer('8297179', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8297179" ></a>
+										<strike>10,000원</strike> &rarr; <em class="price">9,000원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_18"><span class="txt_g1">소개</span>
+							창의력을 길러주는 역사 인물 그림책 시리즈. 어린이들의 일상을 묻는 친근한 질문에서 출발하여, 우리 역사에 기록될 만큼 감동적인 정약전, 정약용 형제간의 우애 이야기를 초등 저학년의 눈높이에 딱 맞게 들려준다. 200년 전 역사 속 인물의 이야기지만 요즘 어린이들이 공감할 수 있는 ‘우애(형제애)’를 주제로 하고 있으며, 역사적 사실에 상상력을 더한 재미난 이야기를 섬세하고 따스한 그림에 담아내었기에, 역사 이야기를 처음 접하는 어린이도 흥미롭게 읽을 수 있다.
+
+이 책은 작가가 정약용이 되고, 독자가 주막집 어린 형</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_18");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_18")) {
+								summarizeBasicIntro(document.getElementById("book_intro_18"), "3");
+							}
+						</script>
+						<li>
+							<p class="rank_view"><span class="no1"></span><span class="no0"></span><span class="no0"></span></p>
+							<div class="thumb type_best">
+						    	<div class="thumb_type thumb_type2">
+						        	<a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8316599" class="N=a:bta.thumb">
+						        		<img src="http://bookthumb.phinf.naver.net/cover/083/165/08316599.jpg?type=m1" alt="퀴즈! 과학상식" onerror="this.src='http://static.naver.net/book/image/noimg3.gif';" >
+						                <span class="mask"><span class="bg1"></span><span class="bg2"></span></span>
+						            </a>
+						        </div>
+						    </div>
+							<dl>
+							<dt id="book_title_19">
+								<a class="N=a:bta.title" href="http://book.naver.com/bookdb/book_detail.nhn?bid=8316599">퀴즈! 과학상식</a> (황당 암호 수학)</dt>
+							<dd class="txt_block">
+								<a href="http://book.naver.com/search/search.nhn?query=%EB%8F%84%EA%B8%B0%EC%84%B1&frameFilterType=1&frameFilterValue=5000023654" class="txt_name N=a:bta.author"> 도기성</a>(만화가) 저 <span class="bar">|</span>
+								<a class="N=a:bta.publisher" href="http://book.naver.com/search/search.nhn?filterType=7&query=%EA%B8%80%EC%86%A1%EC%9D%B4">글송이</a><span class="bar"> | </span>2014.10.30</dd>
+							<dd class="txt_desc">
+								<div class="review_point">
+									<span style="width:00%;"></span>
+								</div>
+								0.0<span class="bar"> | </span>
+								<a class="N=a:bta.review" href="http://book.naver.com/bookdb/review.nhn?bid=8316599">네티즌리뷰 0건</a>
+								
+								<span class="bar">|</span>
+									<a id="buy_btn_8316599" href="javascript:showBuyLayerByBid('8316599')" onclick="return showAdultLayer('8316599', 'false', 'false', 'false');" class="N=a:bta.bookbuy"><img src="http://static.naver.net/book/image/btn_book_buy.gif" alt="도서구매" title="구매 가능한 도서입니다." width="48" height="20" class="btn v2" id="btn_buy_8316599" ></a>
+										<strike>9,500원</strike> &rarr; <em class="price">8,550원(-10%)</em>
+									<!--  ebook 가격 정보 -->
+									</dd>
+		
+							<dd id="book_intro_19"><span class="txt_g1">소개</span>
+							[퀴즈! 과학상식: 황당 암호 수학]은 고대의 숫자 암호, 전치 암호, 좌표 암호, 원판 암호, 도형의 밀기를 활용한 암호 등 수학의 규칙과 개념이 녹아 있는 암호들을 소개하는 책이다. 어린이들이 다양한 암호 속에 담긴 수학 개념과 수학 규칙을 깨우치는 과정에서 논리력, 사고력을 키울 수 있도록 도와준다.</dd>
+							<!-- 연관도서 노출 -->
+							</dl>
+						</li>
+						<script>
+							var itemBiblio = document.getElementById("book_title_19");
+							var paramBiblio = {"sourceText": itemBiblio.innerHTML,
+								 "maxWidth": itemBiblio.parentNode.offsetWidth + parseInt('0'),
+								 "tail": "..",
+								 "maxLine": 1,
+								 "prefix": '',
+								 "postfix": getIcon19(false) + ''
+								};
+	
+							var rtnBiblio = CutLines.putSummary(itemBiblio, paramBiblio);
+	
+							if (document.getElementById("book_intro_19")) {
+								summarizeBasicIntro(document.getElementById("book_intro_19"), "3");
+							}
+						</script>
+						</ol><script type="text/javascript">
+					function getPageLink(page) {
+						document.location.href='http://book.naver.com/category/index.nhn?cate_code=320020&tab=new_book&list_type=list&sort_type=publishday&page='+page;
+						return false;
+					}
+				</script>
+				<div class="paginate">
+	<a href="#" onclick="return getPageLink(1)">1</a>
+					<a href="#" onclick="return getPageLink(2)">2</a>
+					<a href="#" onclick="return getPageLink(3)">3</a>
+					<a href="#" onclick="return getPageLink(4)">4</a>
+					<strong>5</strong><span class="blind"> 현재 선택된 페이지</span>
+					<a href="#" onclick="return getPageLink(6)">6</a>
+					<a href="#" onclick="return getPageLink(7)">7</a>
+					<a href="#" onclick="return getPageLink(8)">8</a>
+					<a href="#" onclick="return getPageLink(9)">9</a>
+					<a href="#" onclick="return getPageLink(10)">10</a>
+					</div>
+<BR/>
+			</div>
+
+			<script type="text/javascript">
+				var lastBuyLayerBid = -1;
+				var buyLayer = document.getElementById("buy_layer");
+				var buyList = document.getElementById("buy_list");
+				var buyTip = document.getElementById("buy_tip");
+				var isIpadBrowser = ("OTHERS".search("IPAD") > -1);
+				
+				function showBuyLayerByBid(bid) {
+					if (bid == null || isNaN(bid)) {
+						return false;
+					}
+					request = NAjax.load("/product/productInfo.nhn?bid=" + bid,	{"callback":generateBuyLayer, "returnType":NAjax.JSON}, bid);
+				}
+
+				function showEbookBuyLayerByBid(bid) {
+					if (bid == null || isNaN(bid)) {
+						return false;
+					}
+					request = NAjax.load("/product/ebookProductInfo.nhn?bid=" + bid,	{"callback":generateEbookBuyLayer, "returnType":NAjax.JSON}, bid);
+				}
+
+				function generateBuyLayer(obj, bid) {
+					var booksBiblio = obj.booksBiblio;
+					var ebookLowestPrice = obj.ebookLowestPrice;
+					var lowestPrice = obj.lowestPrice;
+					var mileage_bandi = obj.mileage_bandi;
+					var mileage_kyobo = obj.mileage_kyobo;
+					var mileage_yes24 = obj.mileage_yes24;
+					obj = obj.productList;
+					buyList.innerHTML = '';
+					var electronicProductList = '';
+
+					for (var idx = 0; idx < obj.length; idx++) {
+						var item = obj[idx];
+						if(item.bookType == 'PAPER') {
+							var buyItem = document.createElement("li");
+							buyList.appendChild(buyItem);
+							if (item.cpName == 'deprecated') {
+								buyItem.innerHTML = "<a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpBiblioURL+"', '"+item.bid+"', '"+item.goodsID+"');\" title='새 창' class='N=a:bta*b.cplist,r:"+item.cpName+",i:"+item.bid+"'><strong>"+ item.cpKoreanName + "</strong></a> <span><em><strong>" + currencyFormat(item.price) + "원</strong></em> <a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpSaleUrl + "', '"+item.bid+"', '"+item.goodsID+"', true);\"  title='새 창' class='N=a:bta*b.buy,r:"+item.cpName+",i:"+item.bid+"'><img src=\"" + "http://static.naver.net/book/image" + "/btn_buy3.gif\" alt='구매' title='구매 새창' width='29' height='18' class='btn'></a></span>";
+							} else {
+								if (item.price == lowestPrice) {
+									buyItem.className = "lowest";
+								}
+								if (item.cpName == "bandi" || item.cpName == "kyobo" || item.cpName == "yes24") {
+									if (item.cpName == "bandi") {
+										var mileage = mileage_bandi;
+									} else if (item.cpName == "kyobo") {
+										var mileage = mileage_kyobo;
+									} else if (item.cpName == "yes24") {
+										var mileage = mileage_yes24;
+									}
+									
+									buyItem.className = buyItem.className + " mileage";
+									buyItem.innerHTML = "<div class=\"mile_wrap\"><a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpBiblioURL+"', '"+item.bid+"', '"+item.goodsID+"');\" title='새창' class='N=a:bel*b.cplist,r:"+item.cpName+",i:"+item.bid+"'>" + item.cpKoreanName + "</a> <a href='#' onclick='return false;' class='ico_mileage' id='iconMileage_" + item.cpName + "' ><img src='http://static.naver.net/book/img/2012/ico_mileage.png' alt='마일리지' width='13' height='13'></a> <div class='lpop_wrap2' id='lpop_wrap_" + item.cpName + "' style='display:none;'><div class='lpop_detail'><div class='lpop_cont'><p class='lcheckout_go'>네이버 아이디 하나로  적립/사용<br><a href='http://mileage.naver.com/customer/home?frm=ec' target='_blank'> <em>네이버 마일리지</em> 서비스 보기 </a></p></div><span class='arr'></span><a href='#' onclick='return false;' class='btn_close' title='닫기'>마일리지 안내 레이어 닫기</a></div></div> <strong>" + mileage + "%<span class='blind'>적립</span></strong></div><span><em>" + currencyFormat(item.price) + "원</em> <a id='product_btn_" + item.cpName + "' href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpSaleUrl+"', '"+item.bid+"', '"+item.goodsID+"', true);\" title='새창' class='N=a:bel*b.buy,r:"+item.cpName+",i:"+item.bid+"'><img src=\"" + "http://static.naver.net/book/image" + "/btn_buy3.gif\" alt='구매' title='구매 새창' width='29' height='18' class='btn'></a></span>";
+								} else {
+									buyItem.innerHTML = "<a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpBiblioURL+"', '"+item.bid+"', '"+item.goodsID+"');\" title='새 창' class='N=a:bta*b.cplist,r:"+item.cpName+",i:"+item.bid+"'>" + item.cpKoreanName + "</a> <span><em>" + currencyFormat(item.price) + "원</strong></em> <a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpSaleUrl+"', '"+item.bid+"', '"+item.goodsID+"', true);\"  title='새 창' class='N=a:bta*b.buy,r:"+item.cpName+",i:"+item.bid+"'><img src=\"" + "http://static.naver.net/book/image" + "/btn_buy3.gif\" alt='구매' title='구매 새창' width='29' height='18' class='btn'></a></span>";
+								}
+							}
+						} 
+					}
+					$Element("buy_list").addClass("productBid_" + bid);
+					$Element("buy_list").addClass("booktype_PAPER");
+
+					buyTip.innerHTML = "<a href=\"/bookdb/price.nhn?bid=" + bid + "#book_price\" class='N=a:bta*b.ben,r:,i:'><img src=\"http://static.naver.net/book/image/btn_benefit.png\" width=\"99\" height=\"20\" title=\"구매혜택 상세보기\" alt=\"구매혜택 상세보기\" border=\"0\">";
+					locateBuyLayer(bid);
+					showBuyLayer(bid, "도서 구매");
+					
+					$A(["bandi", "kyobo"]).forEach(function(cpName,i){
+						
+						$Fn(function () {
+							$Element("lpop_wrap_" + cpName).css("display", "inline");
+							$$("#lpop_wrap_" + cpName + " a")[0].focus();
+						}).attach($("iconMileage_" + cpName), "focus");
+						
+						
+						$Fn(function() {
+							$Element("lpop_wrap_" + cpName).css("display", "none");
+						}).attach($$("#lpop_wrap_" + cpName + " a")[1], "blur");
+					});
+
+					if (isIpadBrowser == false) {
+						(function() {
+							var aElem = $("iconMileage_bandi", "iconMileage_kyobo", "iconMileage_yes24"
+										, "lpop_wrap_bandi", "lpop_wrap_kyobo", "lpop_wrap_yes24");
+							var isIconMileageOver = false;
+	
+							if(aElem) {
+								jindo.$Fn(function(e) {
+									isIconMileageOver = e.type == "mouseover";
+									var el = e.currentElement;
+									
+									if (/(bandi)$/i.test(el.id)) {
+										var welLayer = jindo.$Element("lpop_wrap_bandi");
+									} else if (/(kyobo)$/i.test(el.id)) {
+										var welLayer = jindo.$Element("lpop_wrap_kyobo");
+									} else if (/(yes24)$/i.test(el.id)) {
+										var welLayer = jindo.$Element("lpop_wrap_yes24");
+									}
+									
+									window.setTimeout(function() { 
+										closeSubDetailLayer();
+										if(isIconMileageOver == true) {
+											welLayer.css("display", "inline");
+										}
+									}, 50);
+								}).attach(aElem, "mouseover").attach(aElem, "mouseout").attach(aElem, "click");
+							}
+						})();
+					} else {
+						$$("a[id^=iconMileage_]").forEach(function(v, i){
+							$Fn(showSubDetailLayer).attach($Element(v), "click");
+						});	
+					}
+						 
+					$$("div.lpop_detail a.btn_close").forEach(function(v, i) {
+						$Fn(closeSubDetailLayer).attach($Element(v), "click");
+					});
+					
+					if( $$("#buy_list > li a")[0] != null) {
+						$$("#buy_list > li a")[0].focus();
+					}
+				}
+
+				function generateEbookBuyLayer(obj, bid) {
+					var mileage = obj.mileage;
+					var booksBiblio = obj.booksBiblio;
+					var ebookLowestPrice = obj.ebookLowestPrice;
+					var lowestPrice = obj.lowestPrice;
+					obj = obj.productList;
+					buyList.innerHTML = '';
+					var electronicProductList = '';
+
+					for (var idx = 0; idx < obj.length; idx++) {
+						var item = obj[idx];
+						if(item.bookType != 'PAPER') {
+							var electronicProductItem = "";
+							if (item.price == ebookLowestPrice) {
+								electronicProductItem = "<li class=\"lowest\">";
+							}else{
+								electronicProductItem = "<li>";
+							}
+							
+							electronicProductItem = electronicProductItem + "<a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpBiblioURL+"', '"+item.bid+"', '"+item.goodsID+"');\" class='N=a:bta*e.cp,r:"+item.cpName+",i:"+item.bid+"'>" + item.cpKoreanName + "</a> <span><em>" + currencyFormat(item.price) + "원</strong></em> <a href=\"javascript:cpLink('"+item.cpName+"', '"+item.cpBiblioURL+"', '"+item.bid+"', '"+item.goodsID+"');\" class='N=a:bta*e.buy,r:"+item.cpName+",i:"+item.bid+"'><img src=\"" + "http://static.naver.net/book/image" + "/btn_buy3.gif\" alt='구매' title='구매 새창' width='29' height='18' class='btn'></a></span></li>";
+							electronicProductList = electronicProductList + electronicProductItem;
+						}
+					}
+					
+					$Element("buy_list").addClass("productBid_" + bid);
+					$Element("buy_list").addClass("booktype_EBOOK");
+
+					
+					var booksEbookItem = '';
+					if( !!booksBiblio ) {
+						if (booksBiblio.price == ebookLowestPrice) {
+							booksEbookItem = "<li class=\"lowest\">";
+						} else {
+							booksEbookItem = "<li class=\"\">";
+						}
+						var availableLend = '';
+						if ( booksBiblio.availableLend == "1" ) {
+							availableLend = "대여";
+						}
+						booksEbookItem = booksEbookItem + "<div class='mile_wrap'><a href='"+booksBiblio.endPageUrl+"' class='N=a:bls*e.nstore,r:,i:'>" + "네이버 e북" + "</a> <a href='#' onclick='return false;' class='ico_mileage' id='iconMileage_books'><img src='http://static.naver.net/book/img/2012/ico_mileage.png' width='13' height='13' alt='마일리지'></a>" 
+														+ " <div class='lpop_wrap2' id='lpop_wrap_books' style='position:relative;z-index:100;display:none;'><div class='lpop_detail'><div class='lpop_cont'><p class='lcheckout_go'>네이버 아이디 하나로  적립/사용<br><a href='http://mileage.naver.com/customer/home?frm=ec' target='_blank'> <em>네이버 마일리지</em> 서비스 보기 </a></p></div><span class='arr'></span>"
+														+ "<a href='#' onclick='return false;' class='btn_close' title='닫기'>마일리지 안내 레이어 닫기</a></div></div> "
+														+ " <strong>" + booksBiblio.mileage + "%<span class='blind'>적립</span></strong></div><span>"+availableLend+"<em>" + currencyFormat(String(booksBiblio.price)) + "원</em> <a href='"+booksBiblio.endPageUrl+"' class='N=a:bls*e.nstorebuy,r:,i:'><img src='" + "http://static.naver.net/book/image" + "/btn_buy3.gif' alt='구매' title='구매' width='29' height='18' class='btn'></a></span></li>";
+					}
+					
+					buyList.innerHTML = buyList.innerHTML + booksEbookItem + electronicProductList;
+					buyTip.innerHTML = "<a href=\"/bookdb/price.nhn?bid=" + bid + "#ebook_price\" class='N=a:bta*e.ben,r:,i:'><img src=\"http://static.naver.net/book/image/btn_benefit.png\" width=\"99\" height=\"20\" title=\"구매혜택 상세보기\" alt=\"구매혜택 상세보기\" border=\"0\">";
+					locateEbookBuyLayer(bid);
+					showBuyLayer(bid, "eBook 구매");
+					
+					$A(["books"]).forEach(function(cpName,i){
+						
+						$Fn(function () {
+							$Element("lpop_wrap_" + cpName).css("display", "inline");
+							$$("#lpop_wrap_" + cpName + " a")[0].focus();
+						}).attach($("iconMileage_" + cpName), "focus");
+						
+						
+						$Fn(function() {
+							$Element("lpop_wrap_" + cpName).css("display", "none");
+						}).attach($$("#lpop_wrap_" + cpName + " a")[1], "blur");
+					});
+					
+					if (isIpadBrowser == false) {
+						(function() {
+							var aElem = $("iconMileage_books", "lpop_wrap_books");
+							
+							var isIconMileageOver = false;
+	
+							if(aElem) {
+								jindo.$Fn(function(e) {
+									isIconMileageOver = e.type == "mouseover";
+									var el = e.currentElement;
+									var welLayer = jindo.$Element("lpop_wrap_books");
+									window.setTimeout(function() {
+										closeSubDetailLayer();
+										if(isIconMileageOver == true) {
+											welLayer.css("display", "inline");
+										}
+									}, 50);
+								}).attach(aElem, "mouseover").attach(aElem, "mouseout").attach(aElem, "click");
+							}
+						})();
+					} else {
+						$$("a[id^=iconMileage_]").forEach(function(v, i){
+							$Fn(showSubDetailLayer).attach($Element(v), "click");
+						});	
+					}
+						 
+					$$("div.lpop_detail a.btn_close").forEach(function(v, i) {
+						$Fn(closeSubDetailLayer).attach($Element(v), "click");
+					});
+					
+					if( $$("#buy_list > li a")[0] != null) {
+						$$("#buy_list > li a")[0].focus();
+					}
+				}
+
+				function showSubDetailLayer(e) {
+					$$("div.lpop_wrap2").forEach(function(v, i){
+						$Element(v).css("display", "none");
+					});
+					
+					var nextElement = e.currentElement.nextElementSibling;
+					$Element(nextElement).css("display", "inline");
+					addCheckoutLink(nextElement.id);
+				}
+
+				function closeSubDetailLayer(e) {
+					if(isIpadBrowser == true) {
+						var parentNode = e.currentElement.parentNode.parentNode.id;
+						removeCheckoutLink(parentNode);
+					}
+					
+					$$("div.lpop_wrap2").forEach(function(v, i){
+						$Element(v).css("display", "none");
+					});
+				}
+
+				function addCheckoutLink(id) {
+					var checkLinkObj = $Element($$("#" + id + " p.lcheckout_go")[0]);
+					if (checkLinkObj.child().length < 1) {
+						$Element($$("#" + id + " p.lcheckout_go")[0]).append(document.createTextNode("네이버 아이디 하나로  적립/사용"));
+						$Element($$("#" + id + " p.lcheckout_go")[0]).append("<br>");
+						$Element($$("#" + id + " p.lcheckout_go")[0]).append("<a href='http://mileage.naver.com/customer/home?frm=ec' target='_blank'> <em>네이버 마일리지</em> 서비스 보기 </a>");
+					}
+				}
+
+				function removeCheckoutLink(id) {
+					$Element($$("#" + id + " p.lcheckout_go")[0]).empty();
+				}
+				
+				function locateBuyLayer(bid) {
+					var listType = $$(".category_section > ol")[0].className;
+					if (listType == "image") {
+						var content = jindo.$Element($('content')).offset();
+						var offset = jindo.$Element("btn_buy_" + bid).offset();
+						var left = offset.left - content.left - 3;
+						var index = $("buy_btn_" + bid).parentNode.parentNode.parentNode.className.split("list_")[1];
+						var top = $$(".category_section > ol.image > li.list_" + index)[0].offsetTop + $("buy_btn_" + bid).parentNode.offsetTop + $("btn_buy_" + bid).height + 2;
+					} else {
+						var left = $("btn_buy_" + bid).offsetLeft + $("btn_buy_" + bid).width / 2 - 154;
+						var top = $("categoryBiblioList").offsetTop + $("buy_btn_" + bid).parentNode.parentNode.parentNode.offsetTop + $("buy_btn_" + bid).parentNode.offsetTop + $("btn_buy_" + bid).height;
+					}
+					var buyLayer = $("buy_layer");
+					buyLayer.style.top = top + "px";
+					buyLayer.style.left = left + "px";
+				}
+
+				function locateEbookBuyLayer(bid) {
+					var listType = $$(".category_section > ol")[0].className;
+					if (listType == "image") {
+						var content = jindo.$Element($('content')).offset();
+						var offset = jindo.$Element("btn_ebook_buy_" + bid).offset();
+						var left = offset.left - content.left - 3;
+						var index = $("buy_btn_" + bid).parentNode.parentNode.parentNode.className.split("list_")[1];
+						var top = $$(".category_section > ol.image > li.list_" + index)[0].offsetTop + $("buy_btn_" + bid).parentNode.offsetTop + $("btn_buy_" + bid).height + 2;
+					} else {
+						var left = $("btn_ebook_buy_" + bid).offsetLeft + $("btn_ebook_buy_" + bid).width / 2 - 154;
+						var top = $("categoryBiblioList").offsetTop + $("buy_btn_" + bid).parentNode.parentNode.parentNode.offsetTop + $("buy_btn_" + bid).parentNode.offsetTop + $("btn_buy_" + bid).height;
+					}
+					var buyLayer = $("buy_layer");
+					buyLayer.style.top = top + "px";
+					buyLayer.style.left = left + "px";
+				}
+
+				function showBuyLayer(bid, title) {
+					lastBuyLayerBid = bid;
+					lastShowLayerElement = buyLayer;
+					document.getElementById("buy_layer_title").innerHTML = title;
+					buyLayer.className = "layerpopup on";
+				}
+
+				function hideBuyLayer() {
+					buyLayer.className = "layerpopup";
+					bid = $Element("buy_list").className().split("productBid_")[1].split(" ")[0];
+					booktype = $Element("buy_list").className().split("booktype_")[1].split(" ")[0];
+
+					if (bid != undefined) {
+						if( booktype == "EBOOK" ) {
+							$("ebook_buy_btn_" + bid).focus();
+						}else {
+							$("buy_btn_" + bid).focus();
+						}
+						$Element("buy_list").removeClass("productBid_" + bid);
+						$Element("buy_list").removeClass("booktype_" + booktype);
+					}
+					return false;
+				}
+			</script>
+</div>
+
+<div id="bookshelf_layer" class="layerpopup"> 
+	<div class="content"> 
+		<div class="lyr_people"> 
+			<strong class="blind">이 책을 추천한 지식인 레이어</strong> 
+			<dl> 
+				<dt>이 책을 추천한 지식인</dt> 
+                <dd><ul id="bookshelf_list" class="people_list"></ul></dd>
+			</dl> 
+			<a href="#" onclick="return hideBookshelfLayer();" onblur="return hideBookshelfLayer();" class="btn_close N=a:inb*k.name" title="닫기">이 책을 추천한 지식인 레이어 닫기</a> 
+		</div> 
+	</div> 
+</div> 
+
+<script type="text/javascript">
+
+function showBookshelfLayerByBid(bid) {
+	if (bid == null) {
+		return false;
+	}
+	request = NAjax.load("/bookshelf/bookshelf_list_json.nhn?bid=" + bid, {"callback":generateBookshelfLayer, "returnType":NAjax.JSON}, bid);
+}
+
+function generateBookshelfLayer(obj, bid) {
+	var bookshelfList = jindo.$("bookshelf_list");
+	var bookshelfListInfo = obj.bookshelfList;
+	var liHtml = "";
+	for (var idx = 0; idx < bookshelfListInfo.length; idx++) {
+		var item = bookshelfListInfo[idx];
+		liHtml += "<li><a href=\""+ item.lifeLink +"\" target=\"_blank\" class='N=a:inb*k.name'>" + item.kinName + "</a><span><a href=\""+ item.lifeLink +"\" target=\"_blank\" class=\"btn_goto N=a:inb*k.shcu\">바로가기</a></span></li>";
+	}
+	bookshelfList.innerHTML = liHtml;
+	locateBookshelfLayer(bid);
+	showBookshelfLayer();
+}
+function locateBookshelfLayer(bid) {
+	var contentParent = jindo.$Element($('content').parentNode).offset();
+	var offset = jindo.$Element("bookshelf_btn_img_" + bid).offset();
+	var left = offset.left - contentParent.left- 3;
+	var index = $("bookshelf_btn_" + bid).parentNode.parentNode.parentNode.className.split("list_")[1];
+	var top = offset.top - contentParent.top + 22;
+
+	var layer = $("bookshelf_layer");
+	layer.style.top = top + "px";
+	layer.style.left = left + "px";
+}
+
+function showBookshelfLayer() {
+	var layer = $("bookshelf_layer");
+	layer.className = "layerpopup on";
+}
+
+function hideBookshelfLayer() {
+	var layer = $("bookshelf_layer");
+	layer.className = "layerpopup";
+	return false;
+}
+</script><div class="cp_list">
+	<ul class="NE=a:clo">
+	<li class="yes24 first"><a class="NPI=a:yes24" href="http://book.naver.com/product/go.nhn?cpName=yes24" target="_blank"><img src="http://static.naver.com/book/image/img_cp_yes24.gif" alt="YES24" height="50"></a></li>
+	<li class="bandi"><a class="NPI=a:bandi" href="http://book.naver.com/product/go.nhn?cpName=bandi" target="_blank"><img src="http://static.naver.com/book/image/img_cp_bandinlunis.gif" alt="BANDI&amp;LUNIS" height="50"></a></li>
+	<li class="aladdin"><a class="NPI=a:aladdin" href="http://book.naver.com/product/go.nhn?cpName=aladdin" target="_blank"><img src="http://static.naver.com/book/image/img_cp_aladdin_2.gif" alt="알라딘" height="50"></a></li>
+	<li class="bookpark"><a class="NPI=a:interpark" href="http://book.naver.com/product/go.nhn?cpName=bookpark" target="_blank"><img src="http://static.naver.com/book/image/img_cp_interpark.gif" alt="INTERPARK" height="50"></a></li>
+	<li class="kangcom"><a class="NPI=a:kangcom" href="http://book.naver.com/product/go.nhn?cpName=kangcom" target="_blank"><img src="http://static.naver.com/book/image/img_cp_kangcom.gif" alt="kangcom" height="50"></a></li>
+	<li class="morning365"><a class="NPI=a:11st" href="http://book.naver.com/product/go.nhn?cpName=morning365" target="_blank"><img src="http://static.naver.com/book/image/img_cp_11st.gif" alt="도서11번가" height="50"></a></li>
+	<li class="kyobo"><a class="NPI=a:kyobo" href="http://book.naver.com/product/go.nhn?cpName=kyobo" target="_blank"><img src="http://static.naver.com/book/image/img_cp_kyobo.gif" alt="인터넷 교보문고" height="50"></a></li>
+	<li class="ypbooks"><a class="NPI=a:ypbook" href="http://www.ypbooks.co.kr/ypbooks/WebHome/naverbook/main.jsp?gubun=NB" target="_blank"><img src="http://static.naver.com/book/image/img_cp_ypbooks.gif" alt="YP BOOKS 영풍문고" height="50"></a></li>
+	</ul>
+</div>
+</div><script type="text/javascript" src="http://static.naver.net/common/js/cs_ops_webncc.js"></script>
+	<div id="footer">
+		<h3 class="blind">푸터</h3>
+		<ul class="NE=a:fot">
+		<li><a class="NPI=a:agreement" href="http://www.naver.com/rules/service.html" target="_blank"><strong>이용약관</strong></a></li>
+		<li><a class="NPI=a:privacy" href="http://www.naver.com/rules/privacy.html" target="_blank"><strong>개인정보취급방침</strong></a></li>
+		<li><a class="NPI=a:disclaimer" href="http://www.naver.com/rules/disclaimer.html" target="_blank"><strong>책임의 한계와 법적고지</strong></a></li>
+		<li><a class="NPI=a:publisher" href="http://publisher.naver.com/" target="_blank"><strong>출판사 제휴안내</strong></a></li>
+		<li><a class="NPI=a:library" href="/guide/nl/index.nhn" target="_blank"><strong>도서관안내</strong></a></li>
+		<li><a class="NPI=a:help" href="https://help.naver.com/support/service/main.nhn?serviceNo=702" target="_blank"><strong>책 고객센터</strong></a></li>
+		</ul>
+		<p class="info">네이버책은 통신판매중개자로서 통신판매의 당사자가 아니며, 상품 주문, 배송 및 환불의 의무와 책임은 각 판매업체에 있습니다.<br>
+                본 콘텐츠의 저작권은 저자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적책임을 질 수 있습니다.<br>
+                외부 저작권자가 제공한 콘텐츠는 네이버의 입장과 다를 수 있습니다.</p>
+                <p class="info">
+                        사업자등록번호 : 220-81-62517<span>통신판매업 신고번호</span> : 경기성남 제 2006 - 692호<span>대표이사 : 김상헌</span><span><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">사업자등록정보 확인</a></span><br>
+                        주소 : 경기도 성남시 분당구 불정로 6 네이버 그린팩토리 463-867<span>대표전화 : 1588-3820</span>
+                </p>
+		<address>
+		<a href="http://www.navercorp.com/" target="_blank" class="logo N=a:fot.nhn">NAVER</a>
+		Copyright &copy;
+		<a class="N=a:fot.nhncorp" href="http://www.navercorp.com/" target="_blank"><strong>NAVER Corp.</strong></a>
+		All Rights Reserved.
+		</address>
+	</div>
+</div>
+<script type="text/javascript">
+
+function applyAutoComplete() {
+	smartSearch = new nhn.AjaxSuggestUS("nx_query", "autoFrame", {
+		url : 'http://ac.book.naver.com/ac',
+		sFromName : "snbSearchForm",
+		triangleBtn : "nautocomplete",
+		sListMaxLength: 50,
+		request_type : "jsonp",
+		request_data : {q:"{query}", t_koreng: "1", st:"111", r_lt:"101", r_format:"json", q_enc:"UTF-8", r_enc:"UTF-8" , r_unicode:"0", r_escape:"1"}
+	}).attach({
+		actSubmit : function(){
+			this.elForm.submit();
+		},
+		acShow : function(){
+			var detailSearchLayer = jindo.$Element("detailSearchLayer");
+			if (!!detailSearchLayer && detailSearchLayer.visible()) {
+				detailSearchLayer.hide();
+			}
+		}
+	})
+}
+
+
+function loadAutoCompleteJS() {
+	var domscript = document.createElement('script');
+	domscript.src = "/js/autoCompleteUS.js?20141113172321";
+	domscript.onloadDone = false;
+	domscript.onload = function() { 
+	    if (!domscript.onloadDone) {
+	        domscript.onloadDone = true;
+	        applyAutoComplete(); 
+	    }
+	};
+	domscript.onreadystatechange = function() { 
+	    if (("loaded" === domscript.readyState || "complete" === domscript.readyState) && !domscript.onloadDone) {
+	        domscript.onloadDone = true; 
+	        applyAutoComplete();
+	    }
+	}
+	document.getElementsByTagName('head')[0].appendChild(domscript);
+}
+
+jindo.$Fn(function(){	
+	getGNB();
+	$("autoFrame").contentWindow.location.href="/html/reatcmp.html?20141113172321";
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+			nextLeftCategoryFocus();
+			event.stopDefault();
+		}
+	}).attach($("naver_bookCast"), "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == true && key.keyCode == TAB_KEY_CODE) {
+			nextFocusSelect('mobile_button');
+			event.stopDefault();
+		}
+	}).attach($("search_category"), "keydown");
+	
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == true && key.keyCode == TAB_KEY_CODE) {
+			nextFocusSelect('last_left_category');
+			event.stopDefault();
+		}
+	}).attach($("today_book_img"), "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+			nextFocusSelect('today_book_img');
+			event.stopDefault();
+		}
+	}).attach($("last_left_category"), "keydown");
+	
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+			nextFocusSelect('search_category');
+			event.stopDefault();
+		}
+	}).attach($("btn_detail_search"), "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == true && key.keyCode == TAB_KEY_CODE) {
+			$Element("lc_100").removeClass("over");
+			$("naver_bookCast").focus();
+			event.stopDefault();
+		}
+	}).attach($$("#lc_100 > a")[0], "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == true && key.keyCode == TAB_KEY_CODE) {
+			nextFocusSelect("naver_bookCast");
+			event.stopDefault();
+		}
+	}).attach($("yes24_bestseller", "todaybook_recent", "theme_rcmmd", "wish_list"), "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		
+		
+		
+	}).attach($("naverMe"), "keydown");
+	
+	$Fn(function(event) {
+		var key = event.key();
+		var TAB_KEY_CODE = 9;
+		if (key.shift == false && key.keyCode == TAB_KEY_CODE) {
+			focusNaverMeExplain();
+			event.stopDefault();
+		}
+	}).attach($("todaybook_cate"), "keydown");
+	
+	
+	jindo.$Fn(function() {
+		jindo.$Element("gnb_user").toggle();
+	}).attach($("gnb_nicknm"), "focus");
+	
+	jindo.$Fn(function() {
+		jindo.$Element("gnb_more").toggle();
+	}).attach(jindo.$("more"), "focus");
+}).attach(window, "load");
+</script>
+<script type="text/javascript">
+initKey();
+function initKey() {
+	document.onkeydown = keypress;
+}
+function keypress(ev) {
+	if(ev != null && ev != "undefined") {
+		if(ev.keyCode == 113) {
+			document.getElementById("nx_query").imeMode ='active';
+			document.getElementById("nx_query").select();
+		}
+	}
+}
+</script><script type="text/javascript">
+	
+		lcs_do();
+	
+	var CH = {
+		text: function(obj) {
+			var text = obj.textContent;
+			if(text) {
+				return text.replace(/\s/g,"");
+			}
+			return "";
+		},
+		url: function(obj) {
+			if(obj.href) {
+					return obj.href;
+			}
+			return "";
+		},
+		query: function(obj) {
+			var q = "";
+			if(obj) {
+				q = "?";
+				for(var key in obj) {
+					q += key + "=" + encodeURIComponent(obj[key]) + "&";
+				}
+				q += "timestamp=" + new Date().getTime();
+			}
+			return q;
+		},
+		send: function(query) {
+			var sReq = "http://book.naver.com/monitor/cc" + query;
+			var oImg = new Image();
+			oImg.src = sReq;
+		},
+		mclickcr : function(obj, area, cid, rank, evt) {
+			var p = jindo.$Event().pos();
+			var size = jindo.$Document().clientSize();
+			var obj = {
+				nsc : nsc,
+				text : '',
+				url : CH.url(obj),
+				area : area,
+				cid : cid,
+				rank : rank,
+				pageX : p.pageX,
+				pageY : p.pageY,
+				width : size.width
+			}
+			var q = CH.query(obj);
+			CH.send(q);
+		},
+		mnclk: function(oItem, sArea, sCid, sRank) {
+			var obj = {
+				nsc : nsc,
+				text : CH.text(oItem),
+				url : CH.url(oItem),
+				area : sArea,
+				cid : sCid,
+				rank : sRank
+			}
+			var q = CH.query(obj);
+			CH.send(q);
+		}
+	};
+	jindo.$Fn(function() {
+		if(typeof clickcr != "undefined") {
+			_clickcr = clickcr;
+			clickcr = function(obj, area, cid, rank, evt, opt) {
+				try {
+				CH.mclickcr(obj, area, cid, rank, evt);	
+				}catch(e){}
+				_clickcr(obj, area, cid, rank, evt, opt);
+			}
+		}
+
+		
+	}).attach(window, "load");
+
+
+	
+</script>
+</body>
+</html>

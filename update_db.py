@@ -73,7 +73,7 @@ for category in categoryList:
         db = sqlite3.connect('info.sqlite')
         cur = db.cursor()
 
-        query = 'CREATE TABLE "db_%s_%s_%d_%d"("RANKING" INTEGER PRIMARY KEY NOT NULL, "BOOK_NAME" TEXT, "AUTHOR" TEXT, "STAR" FLOAT, "IMAGE_URL" TEXT, "ISBN" INTEGER, "PUBLISHER" TEXT, "PUB_DATE" TEXT)' % (str(category),str(tab),year,month)
+        query = 'CREATE TABLE "db_%s_%s_%d_%d"("RANKING" INTEGER PRIMARY KEY NOT NULL, "BOOK_NAME" TEXT, "AUTHOR" TEXT, "STAR" FLOAT, "IMAGE_URL" TEXT, "ISBN" INTEGER, "PUBLISHER" TEXT, "PUB_DATE" TEXT, "BODY" TEXT)' % (str(category),str(tab),year,month)
         cur.execute(query)
         
         with open(json_tab_path+'books.json') as fp:
@@ -87,7 +87,10 @@ for category in categoryList:
             image_url = book['img_url']
             publisher = book['publisher']
             pub_date = book['date']
-            query = 'INSERT INTO db_%s_%s_%d_%d("RANKING","BOOK_NAME","AUTHOR","STAR","IMAGE_URL","PUBLISHER","PUB_DATE") VALUES (%d,"%s","%s","%s","%s","%s","%s"); ' % (str(category),str(tab),year,month,rank,book_name,author,star,image_url,publisher,pub_date)
+            body = book['body']
+            body = body.replace('\"','')
+            body = body.replace('\'','')
+            query = 'INSERT INTO db_%s_%s_%d_%d("RANKING","BOOK_NAME","AUTHOR","STAR","IMAGE_URL","PUBLISHER","PUB_DATE","BODY") VALUES (%d,"%s","%s","%s","%s","%s","%s","%s"); ' % (str(category),str(tab),year,month,rank,book_name,author,star,image_url,publisher,pub_date,body)
 #    print query
     #ret = ret + query
     #cur = db.cursor()    
